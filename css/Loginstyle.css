@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  align-items: center;
+  justify-content: center;
+  background-image: url(img//home.jpg);
+}
+h1{
+    text-align: center;
+    color: blue;
+    margin-bottom: 50px;
+}
+h3{
+    text-align: center;
+    margin-bottom: 10px;
+}
+.container {
+  position: absolute;
+  max-width: 500px;
+  height: auto;
+  left: 100px;
+  width: 100%;
+  padding: 25px 25px 25px 25px;
+  border-radius: 8px;
+  background:transparent;
+ margin-top: 100px;
+ border: 1px solid black;
+}
+
+.form-label{
+    padding-bottom: 0px;
+    font-weight: bold;
+    color: black;
+}
+
+.form-text{
+    color: black;
+}
+
+#btnSubmit{
+    font-size: 30px;
+    margin-top: 40px;
+    width: 450px;
+
+}
