@@ -1,42 +1,94 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/4874d070ea.js" crossorigin="anonymous"></script>
-    <!-- css Stylesheet -->
-    <link href="css/Loginstyle.css" rel="stylesheet">   
- 
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>User Login</title>
 </head>
-<body style="background-image: url(img/home.jpg);"> 
-    <div class="container-fluid">
-     <div class="container">
-	   <h1>LOG IN</h1>
-        <form action="#" method="post" name="frmlogin" utocomplete="off">
-          <div class="inputfeild mt-3 mb-3">
-              <label for="UserEmail" class="form-label mt-2 mb-3" >UserEmail</label>
-              <input type="email" name="txtEmail" id="txtEmail"  class="form-control"  placeholder="UserEmail" required> 
-          </div>
-         <div class="inputfeild mt-3">
-             <label for="Password" class="form-label mt-2 mb-3">Password</label>
-               <input type="password" placeholder="Password" name="txtPassword" id="txtPassword" class=" form-control" required>
-         </div>
-          <div class="inputfeild">
-             <button type="submit" class="btn btn-outline-primary btn-lg" id="btnSubmit" name="btnSubmit" >Submit</button>
-          </div>
-          <div class="inputfeild mt-3 mb-3">
-             <label for="ForgottenPassword" class="form-label" ><a href="#" target="_blank" >Forgotten Password ? </a></label><br>
-              <label for="Signup" class="form-label" ><a href="userRegistration.html">Don't Have Account ? Signup </a></label><br>
-          </div>  
-        </form> 
-    </div>
-   </div>
+<body>
+<?php require('navigationBarForms.php');?>
+    <div class="container-fluid" style="margin-top: 100px;">
+       <!-- Form start -->
+	<div class="container mt-2">
+    <h1 >Vehicle Registration</h1>
+    <form class="row g-3 needs-validation" action="#" name="frmvehicleregistration" method="post" autocomplete="off" onsubmit="return result()" >
+<!--Vehicle Registration No-->
+  <div class="inputfeild mt-2 ">
+  	<label for="Vehicle Registration No" class="form-label">Vehicle Registration No</label>
+  	<input type="text" class="form-control" name="txtRegNo" id="txtRegNo" placeholder="Ex:ABC-1234"  onkeyup="validateRegistrationNo()">
+    <span id="Registration_Error"></span>
+  </div>
+	
+<!--Engine No-->
+  <div class="inputfeild mt-2">
+  	<label for="Engine No" class="form-label" >Engine No</label>
+    <input type="text" class="form-control" id="txtEngineNo" name="txtEngineNo" placeholder="Engine No"  onkeyup="validateEngineNo()">
+    <span id="Engine_Error"></span>
+  </div>
+
+  <!--Chassis No -->
+  <div class="inputfeild mt-2">
+  	<label for="Chassis No" class="form-label">Chassis No</label>
+    <input type="text" class="form-control" name="txtChassisNo" id="txtChassisNo" placeholder="Chassis No"  onkeyup="validateChassisNo()" >
+    <span id="Chassis_Error"></span>
+  </div>
+
+<!--Vehicle Class-->
+  <div class="inputfeild mt-2">
+      <label for="Vehicle Class" class="form-label">Vehicle Class</label>
+      <select id="VehicleClass" name="VehicleClass" class="form-control" onkeyup="validateVehicleClass()">
+          <option  value="S">Choose...</option>
+          <option value="A">A  [Motor Cycle Above 100 cc]</option>
+          <option value="A1">A1 [Light Motor Cycle Below 100 cc]</option>
+          <option value="B">B  [Dual Purpose Motor Vehicle]</option>
+          <option value="B1">B1 [Motor TriCycle Or Van]</option>
+          <option value="C">C  [Motor Lorry]</option>
+          <option value="C1">C1 [Light Motor Lorry]</option>
+          <option value="CE">CE [Heavy Motor Lorry]</option>
+          <option value="D">D  [Motor Coach]</option>
+          <option value="D1">D1 [Light Motor Coach]</option>
+          <option value="DE">DE [Heavy Motor Coach]</option>
+          <option value="G">G  [Land Vehicle]</option>
+          <option value="G1">G1 [Hand Tactor]</option>
+          <option value="J">J  [Special Purpose Vehicle]</option>
+      </select>
+
+      <div id="ClassHelp" class="inputfeild form-text" >Can't Find Vehicle Class,<a href="https://dmt.gov.lk/index.php?option=com_content&view=article&id=46&Itemid=163&lang=en" target="_blank">Click Here</a><br>
+      <span id="VehicleClass_Error"></span>
+      </div>
+  </div>	
+
+<!--Fuel Type-->
+   <div class="inputfeild mt-2 form-group ">
+        <label for="FuelType" class="form-label">Fuel Type</label>
+        <select id="FuelType" name="cmbFuelType" class="form-control"  onkeyup="validateFUELTYPE()">
+             <option  value="S">Choose...</option>
+             <option value="Petrol">Petrol</option>
+             <option value="Diesal">Diesal</option>
+        </select>
+        <span id="FuelType_Error"></span>
+   </div> 
+
+  <!--EMAIL No -->
+  <div class="inputfeild mt-2">
+    <label for="Email" class="form-label">UserEmail</label>
+    <input type="text" class="form-control" name="txtEmail" id="txtEmail" placeholder="someone@company.com"  onkeyup="validateEmail()" >
+    <span id="Email_Error"></span>
+  </div>
+
+<!--Check Terms -->
+  <div class="inputfeild mt-3 mx-2 form-check">
+    <input type="checkbox" class="form-check-input" name="chkCheck" id="chStatus" onkeyup="validateTerms()"  >
+    <label class="form-check-label" for="exampleCheck1">Agree to Terms and Conditions</label><br>
+    <span id="Check_Error"></span>
+  </div>
+
+ <!--Button-->
+  <button type="submit" class="btn btn-outline-primary btn-lg" id="btnSubmit" name="btnSubmit" >Submit</button>
+
+</form>
+</div>
+</div>
+<?php require('footer.php');?>
 </body>
 </html>
