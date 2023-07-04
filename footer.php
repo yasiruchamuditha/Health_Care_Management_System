@@ -23,7 +23,7 @@
 </head>
 <body>
 <!-- ======= Footer ======= -->
-<footer id="footer" style="margin-top: 200px;">
+<footer id="footer" style="margin-top: auto;">
     <div class="container">
       <div class="copyright">
         &copy; Copyright <strong><span>PR-CARE</span></strong>. All Rights Reserved

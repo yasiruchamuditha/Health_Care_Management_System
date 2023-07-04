@@ -1,36 +1,86 @@
+<?php require_once('connection.php');
+//Import PHPMailer classes into the global namespace
+//These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+//Load Composer's autoloader
+//require 'vendor/autoload.php';
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+//
+if(isset($_POST["btnSubmit"]))
+{
+    $Name=$_POST["txtName"];
+    $Email=$_POST["txtUSerEmail"];
+    $Contact_No=$_POST["txtTelephoneNo"];
+    $User_Role=$_POST["User_Role"];
+    $Password=$_POST["txtPassword"];
+    $Confirm_Password=$_POST["txtConfirm_Password"]; 
+    $Verification="NotVerified";
+
+    //perform sql to find this email is registered in website
+    $sql = "SELECT * FROM user_registration WHERE Email='$Email' ";
+    $result= mysqli_query($con, $sql);
+    $num_row = mysqli_num_rows($result);
+    $row = mysqli_fetch_array($result);
+    if($row['Email'] == $Email)
+    {  
+        echo '<script>alert("Username is Taken ")</script>';
+    }
+    else
+    {
+        if($Password==$Confirm_Password)
+        {
+        //perform sql
+         $sql = "INSERT INTO user_registration (Name,Contact_No,Email,Password,User_Role,Verification)VALUES('$Name',$Contact_No,'$Email','$Password','$User_Role','$Verification')";
+         $ret= mysqli_query($con, $sql);
+         //location after sign up
+         header('location:userlogin.php');
+        //disconnect 
+         mysqli_close($con);
+        } 
+        else
+        {
+          echo '<script>alert("Please Try Again Shortly....")</script>';     
+        }
+    }
+}    
+?> 
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>User Registration</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> 
-<script src="https://kit.fontawesome.com/4874d070ea.js" crossorigin="anonymous"></script>
-<link href="css/Registration.css" rel="stylesheet">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>User Login</title>
+   <!-- Template Main CSS File -->
+   <link href="css/forms.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </head>
 <body style="background-image: url(img/home.jpg);">
-<div class="container-fluid">
-    <div class="container mt-5">
+<?php require('navigationBarForms.php');?>
+  <div class="container-fluid" id="containerm"  style="margin-top :150px ;margin-bottom :80px; max-width:600px;">
+  <!-- Form start -->
+  <div class="container mt-5">
         <h3>User Registration</h3>
         <form class="row g-3 needs-validation" name="frmUserRegistration" method="post" autocomplete="off" action="#">
             <div class="inputfeild mt-3 ">
                 <label  class="form-label mb-2">Name:</label>
-                <input type="text" class="form-control" name="Name" placeholder="Enter Your First Name" required>
+                <input type="text" class="form-control" name="txtName" placeholder="Enter Your First Name" required>
             </div>
             <div class="inputfeild mt-3 ">
-                <label class="form-label mb-2">Email:</label>
-                <input type="email" class="form-control" name="Email" placeholder="Enter Your Email" required >
+                <label class="form-label mb-2">USerEmail:</label>
+                <input type="email" class="form-control" name="txtUSerEmail" placeholder="Enter Your USerEmail" required >
             </div>
             <div class="inputfeild mt-3 ">
                 <label  class="form-label mb-2">Telephone No:</label>
-                <input type="text" class="form-control" name="TelephoneNo" placeholder="Enter Your Telephone No" required>
+                <input type="text" class="form-control" name="txtTelephoneNo" placeholder="Enter Your Telephone No" required>
             </div>
-            <div class="inputfeild mt-3 ">
-                <label  class="form-label mb-2">Password:</label>
-                <input type="text" class="form-control" name="Password" placeholder="Enter Password" required>
-            </div>
-            
-          <div class="inputfeild mt-3" >
+            <div class="inputfeild mt-3" >
            <label for="UserRole" class="form-label mb-2">I am ..</label>
              <select id="UserRole" name="User_Role"  class="role form-control" style="height: 50px;" >
                <option selected value="S">Choose..</option>
@@ -39,10 +89,19 @@
                <option value="Admin">Admin</option>
              </select>
           </div>
+            <div class="inputfeild mt-3 ">
+                <label  class="form-label mb-2">Password:</label>
+                <input type="text" class="form-control" name="txtPassword" placeholder="Enter Password" required>
+            </div>
+            <div class="inputfeild mt-3 ">
+                <label  class="form-label mb-2">Confirm Password:</label>
+                <input type="text" class="form-control" name="txtConfirm_Password" placeholder="Please Confirm Password" required>
+            </div>
         <!--Button-->
-        <button type="submit" class="btn btn-outline-primary btn-lg " id="btnSubmit" name="submit" >Submit Details</button>
+        <button type="submit" class="btn btn-outline-primary btn-lg " id="btnSubmit" name="btnSubmit" >Submit Details</button>
     </form>
  </div>
 </div>
+<?php require('footer.php');?>
 </body>
 </html>
