@@ -1,16 +1,4 @@
 <?php require_once('connection.php');
-//Import PHPMailer classes into the global namespace
-//These must be at the top of your script, not inside a function
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
-//Load Composer's autoloader
-//require 'vendor/autoload.php';
-require 'PHPMailer/src/Exception.php';
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
-//
 if(isset($_POST["btnSubmit"]))
 {
     $Name=$_POST["txtName"];
@@ -35,10 +23,23 @@ if(isset($_POST["btnSubmit"]))
         if($Password==$Confirm_Password)
         {
         //perform sql
-         $sql = "INSERT INTO user_registration (Name,Contact_No,Email,Password,User_Role,Verification)VALUES('$Name',$Contact_No,'$Email','$Password','$User_Role','$Verification')";
+         $sql = "INSERT INTO user_registration (Name,Email,Contact_No,User_Role,Password,Verification)
+                 VALUES('$Name','$Email',$Contact_No,'$User_Role','$Password','$Verification')";
+
          $ret= mysqli_query($con, $sql);
-         //location after sign up
-         header('location:userlogin.php');
+         if ($ret > 0)
+         {
+
+          //location after sign up
+          header('location:user_login.php');
+          echo '<script>alert("Login successful!")</script>';
+         }
+         else
+         {
+            echo '<script>alert("Invalid username or password. Please try again !")</script>';
+            //location after sign up
+            header('location:index.php');
+         }
         //disconnect 
          mysqli_close($con);
         } 
@@ -74,7 +75,7 @@ if(isset($_POST["btnSubmit"]))
             </div>
             <div class="inputfeild mt-3 ">
                 <label class="form-label mb-2">USerEmail:</label>
-                <input type="email" class="form-control" name="txtUSerEmail" placeholder="Enter Your USerEmail" required >
+                <input type="email" class="form-control" name="txtUSerEmail" placeholder="Enter Your UserEmail" required >
             </div>
             <div class="inputfeild mt-3 ">
                 <label  class="form-label mb-2">Telephone No:</label>
