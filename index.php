@@ -228,7 +228,7 @@
               <div class="icon"><i class="fas fa-pills"></i></div>
               <h4><a href="">Doctor Appoinment</a></h4>
               <p>Reserve Your Doctor Appoinment</p>
-               <a href="Appoinment.php" class="btn btn-primary mt-5">Reserve Now</a>
+               <a href="Doctor_Appoinment.php" class="btn btn-primary mt-5">Reserve Now</a>
             </div>
           </div>
 
@@ -237,7 +237,7 @@
               <div class="icon"><i class="fas fa-hospital-user"></i></div>
               <h4><a href="">Dental Appoinement </a></h4>
               <p>Reserve Your Dental Appoinment</p>
-               <a href="#" class="btn btn-primary mt-5">Reserve Now</a>
+               <a href="Dental_Appointment.php" class="btn btn-primary mt-5">Reserve Now</a>
             </div>
           </div>
 
@@ -246,7 +246,7 @@
               <div class="icon"><i class="fas fa-dna"></i></div>
               <h4><a href="">Blood Test</a></h4>
               <p>Reserve Your Blood Test Appoinment</p>
-               <a href="#" class="btn btn-primary mt-5">Reserve Now</a>
+               <a href="Blood_Test.php" class="btn btn-primary mt-5">Reserve Now</a>
             </div>
           </div>
 
@@ -255,7 +255,7 @@
               <div class="icon"><i class="fas fa-wheelchair"></i></div>
               <h4><a href="">Physiotherapy Sessions</a></h4>
               <p>Reserve Your Physiotherapy Appoinment </p>
-               <a href="#" class="btn btn-primary mt-5">Reserve Now</a>
+               <a href="Physiotherapy.php" class="btn btn-primary mt-5">Reserve Now</a>
             </div>
           </div>
           
@@ -264,7 +264,7 @@
               <div class="icon"><i class="fas fa-notes-medical"></i></div>
               <h4><a href="">Public Health</a></h4>
               <p>MImprove Your Health Knowledge</p>
-               <a href="#" class="btn btn-primary mt-5">Check Now</a>
+               <a href="Public_Health.php" class="btn btn-primary mt-5">Check Now</a>
             </div>
           </div>
 

@@ -55,13 +55,13 @@ if(isset($_POST["btnSubmit"]))
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>User Login</title>
-   <!-- Template Main CSS File -->
-   <link href="css/user_style.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>User Login</title>
+<!-- Template Main CSS File -->
+<link href="css/user_style.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </head>
 <body style="background-image: url(img/home.jpg);">
 <?php require('navigationBarForms.php');?>
@@ -89,7 +89,7 @@ if(isset($_POST["btnSubmit"]))
     <span id="Check_Error"></span>
   </div>
   <div class="inputfeild mt-4">
-    <label for="ForgottenPassword" class="form-label" ><a href="forgottenPassword.php" target="_blank" style="color: Black;">Forgotten Password ? Click Here. </a></label><br>
+    <label for="ForgottenPassword" class="form-label" ><a href="forgotten_Password.php" target="_blank" style="color: Black;">Forgotten Password ? Click Here. </a></label><br>
     <label for="Signup" class="form-label" ><a href="user_Registration.php" target="_blank" style="color: Black;">Don't Have Account ? Click Here. </a></label><br>
   </div>  
  <!--Button-->

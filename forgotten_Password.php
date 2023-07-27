@@ -51,7 +51,7 @@ if(isset($_POST["btnSubmit"]))
  
         $ret= mysqli_query($con, $sql);
      
-        header('location:verifycode.php');
+        header('location:verify_Password.php');
    
 
      //disconnect 
@@ -86,48 +86,55 @@ if(isset($_POST["btnSubmit"]))
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
   <!-- Template Main CSS File -->
   <link href="css/style.css" rel="stylesheet">
-  <link href="css/forgotten.css" rel="stylesheet">
+  <link href="css/forgotten_password.css" rel="stylesheet">
 </head>
 <body style="background-image: url(img/home.jpg);">
 <?php require('navigationBarForms.php');?>
-<div  style="margin:150px;50px;100px;50px;">
 <div class="container-fluid" id="containerm"  >
-<h1 id="h1">Forgotten Password</h1>
-    <form class="row g-3 needs-validation" action="#" method="post" onsubmit="return result()" >
-        <div class="inputfeild mt-3">
-            <label for="heading" class="form-label mt-5">Please Enter Verification Code that Send to Your Email for verify Your User Account</label>
-            <input type="text" class="form-control mt-2" id="txtcode" name="txtcode" placeholder="Verification Code" onkeyup="validateCode()" style="margin-top: 50px;">
-            <span id="Code_Error"></span>
-        </div>
-    <!--Button-->
-    <button type="submit" id="btnSubmit" class="btn btn-outline-dark btn-lg" name="btnSubmit">Continue</button>
-    </form>
+<h1 id="h1">Forgotten User Account Password</h1>
+<form class="row g-3 needs-validation" action="#" method="post" onsubmit="return result()" >
+  <div class="inputfeild mt-3">
+  	  <label for="heading" class="form-label mt-3">Please Enter Your UserEmail To Get Verification Code.</label><br>
+      <label for="Email" class="form-label mt-3">User Email</label>
+      <input type="email" class="form-control mt-3" id="txtEmail" name="txtemail" placeholder="User Email" onkeyup="validateEmail()" >
+        <span id="Email_Error"></span>
+  </div>
+ <!--Button-->
+  <button type="submit" id="btnSubmit" class="btn btn-outline-dark btn-lg" name="btnSubmit">Continue</button>
+</form>
 </div>
 
-</div>
 <?php require('footer.php');?>
   <!-- Template Main JS File -->
   <script src="js/main.js"></script>
   <script type="text/javascript">
-function validateCode()
+	  var Email_Error=document.getElementById('Email_Error');
+function validateEmail()
 {
-  
-  var Code=document.getElementById('txtcode').value.replace(/^\s+|\s+$/g, "");
-  if(Code.length == 0)
+  var Email = document.getElementById('txtEmail').value.replace(/^\s+|\s+$/g, "");
+  if (Email.length == 0) 
   {
-    Code_Error.innerHTML='Verification Code is required.';
+     Email_Error.innerHTML='Email is required.';
     return false;
   }
-  Code_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
+  else
+  {
+    var emaiPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+   if (!Email.match(emaiPattern))
+   {
+    Email_Error.innerHTML='Please Enter Email in correct format.';
+    return false;
+   }
+  Email_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
   return true;
+  }  
 }
-
 
 function result()
 {
-  validateCode();
+  validateEmail();
 
-if(!validateCode())  
+if(!validateEmail())  
   {
     return false;
   }
@@ -135,4 +142,5 @@ if(!validateCode())
 
 </script>
 </body>
+
 </html>

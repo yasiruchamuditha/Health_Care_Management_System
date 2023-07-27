@@ -12,7 +12,6 @@ require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 //
 
-
 if(isset($_POST["btnSubmit"]))
 {
 	$email=$_POST["txtemail"];
@@ -45,7 +44,6 @@ if(isset($_POST["btnSubmit"]))
         $mail->send();
         //echo 'Message has been sent';
 
-  
         //perform sql
         $sql = "INSERT INTO passwordupdates(UserEmail,VerificationCode) VALUES ('$email','$verification_code')";
  
@@ -69,7 +67,7 @@ if(isset($_POST["btnSubmit"]))
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Forgotten Password - User Account</title>
+  <title>Verify Password - User Account</title>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
   <!-- Vendor CSS Files -->
@@ -86,58 +84,46 @@ if(isset($_POST["btnSubmit"]))
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
   <!-- Template Main CSS File -->
   <link href="css/style.css" rel="stylesheet">
-  <link href="css/forgotten.css" rel="stylesheet">
+  <link href="css/forgotten_password.css" rel="stylesheet">
 </head>
 <body style="background-image: url(img/home.jpg);">
 <?php require('navigationBarForms.php');?>
-<div  style="margin:150px;50px;100px;50px;">
 <div class="container-fluid" id="containerm"  >
-<h1 id="h1">Forgotten Password</h1>
-<h1 id="h1">User Account</h1>
-<form class="row g-3 needs-validation" action="#" method="post" onsubmit="return result()" >
-  <div class="inputfeild mt-5">
-  	<label for="heading" class="form-label mt-3">Please Enter Your UserEmail To Get Verification Code.</label>
-      <label for="Email" class="form-label">User Email</label>
-      <input type="email" class="form-control" id="txtEmail" name="txtemail" placeholder="User Email" onkeyup="validateEmail()" >
-        <span id="Email_Error"></span>
-  </div>
- <!--Button-->
-  <button type="submit" id="btnSubmit" class="btn btn-outline-dark btn-lg" name="btnSubmit">Continue</button>
-</form>
-</div>
-
+<h1 id="h1">Verify User Account</h1>
+    <form class="row g-3 needs-validation" action="#" method="post" onsubmit="return result()" >
+        <div class="inputfeild mt-3">
+            <label for="heading" class="form-label mt-5">Enter Verification Code that Send to Your Email for verify Your Account</label>
+            <label for="lable" class="form-label mt-5">Verification Code</label>
+            <input type="text" class="form-control mt-2" id="txtcode" name="txtcode" placeholder="Verification Code" onkeyup="validateCode()" style="margin-top: 50px;">
+            <span id="Code_Error"></span>
+        </div>
+    <!--Button-->
+    <button type="submit" id="btnSubmit" class="btn btn-outline-dark btn-lg" name="btnSubmit">Continue</button>
+    </form>
 </div>
 <?php require('footer.php');?>
   <!-- Template Main JS File -->
   <script src="js/main.js"></script>
   <script type="text/javascript">
-	  var Email_Error=document.getElementById('Email_Error');
-function validateEmail()
+function validateCode()
 {
-  var Email = document.getElementById('txtEmail').value.replace(/^\s+|\s+$/g, "");
-  if (Email.length == 0) 
+  
+  var Code=document.getElementById('txtcode').value.replace(/^\s+|\s+$/g, "");
+  if(Code.length == 0)
   {
-     Email_Error.innerHTML='Email is required.';
+    Code_Error.innerHTML='Verification Code is required.';
     return false;
   }
-  else
-  {
-    var emaiPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-   if (!Email.match(emaiPattern))
-   {
-    Email_Error.innerHTML='Please Enter Email in correct format.';
-    return false;
-   }
-  Email_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
+  Code_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
   return true;
-  }  
 }
+
 
 function result()
 {
-  validateEmail();
+  validateCode();
 
-if(!validateEmail())  
+if(!validateCode())  
   {
     return false;
   }
@@ -145,5 +131,4 @@ if(!validateEmail())
 
 </script>
 </body>
-
 </html>

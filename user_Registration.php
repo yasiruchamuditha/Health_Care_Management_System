@@ -54,20 +54,20 @@ if(isset($_POST["btnSubmit"]))
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>User Login</title>
-   <!-- Template Main CSS File -->
-   <link href="css/forms.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>User Registration</title>
+<!-- Template Main CSS File -->
+<link href="css/User_Registration.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </head>
 <body style="background-image: url(img/home.jpg);">
 <?php require('navigationBarForms.php');?>
-  <div class="container-fluid" id="containerm"  style="margin-top :150px ;margin-bottom :80px; max-width:600px;">
+  <div class="container-fluid" id="containerm">
   <!-- Form start -->
-  <div class="container mt-5">
-        <h3>User Registration</h3>
+  <div class="container mt-3">
+        <h1>User Registration</h1>
         <form class="row g-3 needs-validation" name="frmUserRegistration" method="post" autocomplete="off" action="#">
             <div class="inputfeild mt-3 ">
                 <label  class="form-label mb-2">Name:</label>
