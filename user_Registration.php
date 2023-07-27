@@ -16,7 +16,7 @@ if(isset($_POST["btnSubmit"]))
     $row = mysqli_fetch_array($result);
     if($row['Email'] == $Email)
     {  
-        echo '<script>alert("Username is Taken ")</script>';
+        echo '<script>alert("Username is Taken. ")</script>';
     }
     else
     {
@@ -29,23 +29,23 @@ if(isset($_POST["btnSubmit"]))
          $ret= mysqli_query($con, $sql);
          if ($ret > 0)
          {
-
+          echo "<script>alert('Login successful!');</script>";
           //location after sign up
-          header('location:user_login.php');
-          echo '<script>alert("Login successful!")</script>';
+          header('location:user_Login.php');
          }
          else
          {
-            echo '<script>alert("Invalid username or password. Please try again !")</script>';
+            echo '<script>alert("Please Try Again Shortly....")</script>';
             //location after sign up
-            header('location:index.php');
+            header('location:user_Registration.php');
          }
         //disconnect 
          mysqli_close($con);
         } 
         else
         {
-          echo '<script>alert("Please Try Again Shortly....")</script>';     
+          echo "<script>alert('Invalid username or password. Please try again');</script>";
+          header('location:user_Registration.php');
         }
     }
 }    
@@ -74,7 +74,7 @@ if(isset($_POST["btnSubmit"]))
                 <input type="text" class="form-control" name="txtName" placeholder="Enter Your First Name" required>
             </div>
             <div class="inputfeild mt-3 ">
-                <label class="form-label mb-2">USerEmail:</label>
+                <label class="form-label mb-2">UserEmail:</label>
                 <input type="email" class="form-control" name="txtUSerEmail" placeholder="Enter Your UserEmail" required >
             </div>
             <div class="inputfeild mt-3 ">

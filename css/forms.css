@@ -46,3 +46,13 @@ h3{
 	font-size: 30px;
 	margin-top: 30px;
 }
+
+.inputfeild span{
+       color: red;
+       margin-top: 5PX; 
+      }
+    
+
+.inputfeild span i{
+      color: green;
+      }

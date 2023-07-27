@@ -43,7 +43,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo me-auto"><a href="index.html">PR-CARE</a></h1>
+      <h1 class="logo me-auto"><a href="index.php">PR-CARE</a></h1>
     
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
@@ -56,9 +56,7 @@
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-       <a href="userlogin.php" class="appointment-btn scrollto"><span class="d-none d-md-inline">LOG IN</span></a>
-     <!-- <a href="Appointment.html" class="appointment-btn scrollto"><span class="d-none d-md-inline">Make an</span> Appointment</a>-->
-
+       <a href="user_Login.php" class="appointment-btn scrollto"><span class="d-none d-md-inline">LOG IN</span></a>
     </div>
   </header><!-- End Header -->
 
@@ -216,57 +214,57 @@
         </div>
 
         <div class="row">
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <div class="icon-box">
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch"  style="height: 400px; width:400px; padding:25px 25px 25px 25px; margin:0px 15px 0px 15px;">
+            <div class="icon-box" style="height: 350px; width:350px;">
               <div class="icon"><i class="fas fa-heartbeat"></i></div>
               <h4><a href="">Regular Checkup</a></h4>
-              <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
-               <a href="#" class="btn btn-primary mt-5">Go somewhere</a>
+              <p>Reserved Your Regular Check Appoinment.</p>
+               <a href="Regular_Checkup.php" class="btn btn-primary mt-5">Reserve Now</a>
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-            <div class="icon-box">
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" style="height: 400px; width:400px;padding:25px 25px 25px 25px; margin:0px 15px 0px 15px;">
+            <div class="icon-box" style="height: 350px; width:350px;">
               <div class="icon"><i class="fas fa-pills"></i></div>
-              <h4><a href="">Medicine</a></h4>
-              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-               <a href="#" class="btn btn-primary mt-5">Go somewhere</a>
+              <h4><a href="">Doctor Appoinment</a></h4>
+              <p>Reserve Your Doctor Appoinment</p>
+               <a href="Appoinment.php" class="btn btn-primary mt-5">Reserve Now</a>
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-            <div class="icon-box">
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" style="height: 400px; width:400px; padding:25px 25px 25px 25px; margin:0px 15px 0px 15px;">
+            <div class="icon-box" style="height: 350px; width:350px;">
               <div class="icon"><i class="fas fa-hospital-user"></i></div>
-              <h4><a href="">Pharmeologist</a></h4>
-              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-               <a href="#" class="btn btn-primary mt-5">Go somewhere</a>
+              <h4><a href="">Dental Appoinement </a></h4>
+              <p>Reserve Your Dental Appoinment</p>
+               <a href="#" class="btn btn-primary mt-5">Reserve Now</a>
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-            <div class="icon-box">
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" style="height: 400px; width:400px; padding:25px 25px 25px 25px; margin:0px 15px 0px 15px;">
+            <div class="icon-box" style="height: 350px; width:350px;">
               <div class="icon"><i class="fas fa-dna"></i></div>
               <h4><a href="">Blood Test</a></h4>
-              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-               <a href="#" class="btn btn-primary mt-5">Go somewhere</a>
+              <p>Reserve Your Blood Test Appoinment</p>
+               <a href="#" class="btn btn-primary mt-5">Reserve Now</a>
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-            <div class="icon-box">
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" style="height: 400px; width:400px; padding:25px 25px 25px 25px; margin:0px 15px 0px 15px;">
+            <div class="icon-box" style="height: 350px; width:350px;">
               <div class="icon"><i class="fas fa-wheelchair"></i></div>
-              <h4><a href="">Disabled Person</a></h4>
-              <p>Quis consequatur saepe eligendi voluptatem consequatur dolor consequuntur</p>
-               <a href="#" class="btn btn-primary mt-5">Go somewhere</a>
+              <h4><a href="">Physiotherapy Sessions</a></h4>
+              <p>Reserve Your Physiotherapy Appoinment </p>
+               <a href="#" class="btn btn-primary mt-5">Reserve Now</a>
             </div>
           </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-            <div class="icon-box">
+          
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" style="height: 400px; width:400px; padding:25px 25px 25px 25px; margin:0px 15px 0px 15px;">
+            <div class="icon-box" style="height: 350px; width:350px;">
               <div class="icon"><i class="fas fa-notes-medical"></i></div>
-              <h4><a href="">Health Post</a></h4>
-              <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
-               <a href="#" class="btn btn-primary mt-5">Go somewhere</a>
+              <h4><a href="">Public Health</a></h4>
+              <p>MImprove Your Health Knowledge</p>
+               <a href="#" class="btn btn-primary mt-5">Check Now</a>
             </div>
           </div>
 
