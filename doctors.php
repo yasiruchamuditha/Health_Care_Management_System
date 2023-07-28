@@ -24,24 +24,24 @@
 <body>
 <?php require('navigationBarForms.php');?>
 <div  style="margin:150px;50px;100px;50px;">
-
 <div  style="margin:50px;0px;100px;0px;">
+<h1>Doctor User Account</h1>
 <div class="row">
   <div class="col-sm-6 mb-3 mb-sm-0">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <h5 class="card-title">Register As a Docotor</h5>
+        <p class="card-text">You can Register in our Site as a Doctor.</p>
+        <a href="#" class="btn btn-primary">Click Here</a>
       </div>
     </div>
   </div>
   <div class="col-sm-6">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <h5 class="card-title">My Appointments</h5>
+        <p class="card-text">Appointmnet under your name display here.</p>
+        <a href="#" class="btn btn-primary">Click Here</a>
       </div>
     </div>
   </div>
@@ -53,18 +53,18 @@
   <div class="col-sm-6 mb-3 mb-sm-0">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <h5 class="card-title">My Account</h5>
+        <p class="card-text">Your User Profile</p>
+        <a href="#" class="btn btn-primary">Check Now</a>
       </div>
     </div>
   </div>
   <div class="col-sm-6">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <h5 class="card-title">Special Notices</h5>
+        <p class="card-text">You can provide Special Notices for us</p>
+        <a href="#" class="btn btn-primary">Check Now</a>
       </div>
     </div>
   </div>
