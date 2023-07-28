@@ -22,7 +22,7 @@
   <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-<?php require('navigationBarForms.php');?>
+<?php require('A_Navigation_Bar.php');?>
 <div  style="margin:150px;50px;100px;50px;">
 <div  style="margin:50px;0px;100px;0px;">
 <h1>Health Care - Admin Panel</h1>
@@ -33,7 +33,7 @@
       <div class="card-body">
         <h5 class="card-title">Doctors Managenment</h5>
         <p class="card-text">Manages the Doctors Registered in the System.</p>
-        <a href="#" class="btn btn-primary">Check now</a>
+        <a href="A_Doctor_Management_page.php" class="btn btn-primary">Check now</a>
       </div>
     </div>
   </div>
@@ -43,7 +43,33 @@
       <div class="card-body">
         <h5 class="card-title">Patient Managenment</h5>
         <p class="card-text">Manages the PAtients Registered in the System.</p>
-        <a href="#" class="btn btn-primary">Check now</a>
+        <a href="A_Patient_Management_Page.php" class="btn btn-primary">Check now</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div  style="margin:50px;0px;100px;0px;">
+<div class="row">
+
+  <div class="col-sm-6 mb-3 mb-sm-0">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">User Account Managenment</h5>
+        <p class="card-text">Manages the User Account of the website.</p>
+        <a href="A_User_Account_Management_page.php" class="btn btn-primary">Check Now</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Physiotheraphy Appoinement Managenment</h5>
+        <p class="card-text">Manages the Physiotheraphy Appoinment Registried by Patients.</p>
+        <a href="A_Physiotheraphy_Management_page.php" class="btn btn-primary">Check Now</a>
       </div>
     </div>
   </div>
@@ -59,7 +85,7 @@
       <div class="card-body">
         <h5 class="card-title">Doctor Appoinment Managenment</h5>
         <p class="card-text">Manages the Doctor Appointment Registried by Patients.</p>
-        <a href="#" class="btn btn-primary">Check Now</a>
+        <a href="A_Doctor_App_Mangement_page.php" class="btn btn-primary">Check Now</a>
       </div>
     </div>
   </div>
@@ -69,7 +95,7 @@
       <div class="card-body">
         <h5 class="card-title">Dental Appoinement Managenment</h5>
         <p class="card-text">Manages the Dental Appoinment Registried by Patients.</p>
-        <a href="#" class="btn btn-primary">Check Now</a>
+        <a href="A_Dental_App_Management_page.php" class="btn btn-primary">Check Now</a>
       </div>
     </div>
   </div>
@@ -85,7 +111,7 @@
       <div class="card-body">
         <h5 class="card-title">Regular CheckUp Managenment</h5>
         <p class="card-text">Manages the Regular Checkup Registried by Patients.</p>
-        <a href="#" class="btn btn-primary">Check Now</a>
+        <a href="A_Regular_checkup_Management_page.php" class="btn btn-primary">Check Now</a>
       </div>
     </div>
   </div>
@@ -95,7 +121,7 @@
       <div class="card-body">
         <h5 class="card-title">Blood Test Managenment</h5>
         <p class="card-text">Manages the Blood Test Registried by Patients.</p>
-        <a href="#" class="btn btn-primary">Check Now</a>
+        <a href="A_Blood_Test_Management_page.php" class="btn btn-primary">Check Now</a>
       </div>
     </div>
   </div>

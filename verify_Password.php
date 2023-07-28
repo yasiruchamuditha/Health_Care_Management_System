@@ -49,7 +49,7 @@ if(isset($_POST["btnSubmit"]))
  
         $ret= mysqli_query($con, $sql);
      
-        header('location:verifycode.php');
+        header('location:verify_Password.php');
    
 
      //disconnect 
