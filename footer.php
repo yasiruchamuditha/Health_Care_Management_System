@@ -28,9 +28,6 @@
       <div class="copyright">
         &copy; Copyright <strong><span>PR-CARE</span></strong>. All Rights Reserved
       </div>
-      <div class="credits">
-        Designed by <a href="https://www.youtube.com/channel/UCc5GjlNTdSV4ZZCsX61mccg">PraRoz</a>
-      </div>
     </div>
   </footer><!-- End Footer -->
   <div id="preloader"></div>

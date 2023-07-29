@@ -23,13 +23,11 @@
 </head>
 <body>
 <!-- ======= Footer ======= -->
-<footer id="footer" style="margin-top: 600px;">
+<footer id="footer" style="margin-top: 400px;">
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>PR-CARE</span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        Designed by <a href="https://www.youtube.com/channel/UCc5GjlNTdSV4ZZCsX61mccg">PraRoz</a>
+        &copy; Copyright <strong><span>PR-CARE</span></strong>.
+        &copy; Copyright <strong><span>THE_CODE</span></strong>. All Rights Reserved
       </div>
     </div>
   </footer><!-- End Footer -->
