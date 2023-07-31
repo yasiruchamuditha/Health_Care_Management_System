@@ -106,8 +106,12 @@ if (isset($_SESSION["Email"])) {
             </div>
 
             <div class="inputfeild mb-3">
-                <label for="email" class="form-label">Specialization:</label>
-                <input type="text" name="txtSpecialization" class="form-control" placeholder="Please Enter Specialization"  required>
+            <select name="specialization" id="specialization">
+            <option value="Cardiologist"<?php if ($selectedSpecialization === "Cardiologist") echo " selected"; ?>>Cardiologist</option>
+            <option value="Dermatologist"<?php if ($selectedSpecialization === "Dermatologist") echo " selected"; ?>>Dermatologist</option>
+            <option value="Orthopedic"<?php if ($selectedSpecialization === "Orthopedic") echo " selected"; ?>>Orthopedic</option>
+            <!-- Add more options as needed -->
+        </select>
             </div>
 
             <div class="inputfeild mb-3">
@@ -119,7 +123,7 @@ if (isset($_SESSION["Email"])) {
                   $Special = '';
                   $concatenated ='';
                    // Retrieve options from the database and populate the select box
-                   $sql = "SELECT * FROM doctor_registration ";
+                   $sql = "SELECT * FROM doctor_registration where Specialization = $selectedSpecialization";
                    $result = $conn->query($sql);
                    if ($result->num_rows > 0) 
                    {

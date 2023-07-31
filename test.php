@@ -7,7 +7,7 @@
   <form action="process.php" method="post">
     <label for="option_select">Select an option:</label>
     <select name="option_select" id="option_select">
-      <?php
+      <?php require_once('M_Connection.php');
          
         // Retrieve options from the database and populate the select box
         $sql = "SELECT Email FROM user_registration";
