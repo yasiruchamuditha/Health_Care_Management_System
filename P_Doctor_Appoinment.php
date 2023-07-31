@@ -10,7 +10,7 @@
   </head>
 
   <body>
-    <?php require('navigationBarForms.php'); ?>
+    <?php require('P_Navigation_Bar.php'); ?>
     <div style="margin: 100px 0px 100px 0px;">
       <div class="inner-layer">
         <div class="container">
@@ -45,9 +45,30 @@
                     <input id="dat" type="text" placeholder="Appointment Date" class="form-control">
                   </div>
                   <div class="row form-row">
-                    <input  type="text" placeholder="Appointment Time" class="form-control">
-                  </div>
+                  <label for="option_select">Select an option:</label>
+                  <select name="option_select" id="option_select">
 
+                  <?php require_once('M_Connection.php');
+                  $Name = '';
+                  $Specialization = '';
+                  $concatenated ='';
+                   // Retrieve options from the database and populate the select box
+                   $sql = "SELECT * FROM doctor_registration";
+                   $result = $conn->query($sql);
+                   if ($result->num_rows > 0) 
+                   {
+                      while ($row = $result->fetch_assoc())
+                      {
+                      $Name = $row["Name"]; // Corrected variable name
+                      $Specialization = $row["Specialization"]; // Corrected variable name
+                      $concatenated = $Name . " " . $Specialization;
+                      echo "<option value='$concatenated'>$concatenated</option>";
+                      }
+                   }
+                   $conn->close();
+                   ?>
+                 </select>
+                  </div>
                   <div class="row form-row">
                     <button class="btn btn-success btn-appointment">
                       Book Appointment

@@ -51,7 +51,7 @@ if (isset($_SESSION["Email"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PR CARE - Regular Checkup</title>
     <!-- Template Main CSS File -->
-    <link href="css/service_page.css" rel="stylesheet">
+    <link href="css/P_Service_Page.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
@@ -141,9 +141,9 @@ if (isset($_SESSION["Email"])) {
         </form>
         </div>
         <?php else: ?>
-        <div class="container mt-3">
-            <h1>Please Log In First Before Making an Appointment</h1>
-            <a href="M_User_Login.php" class="btn btn-primary">Log In</a>
+        <div class="container mt-3" id="outputBox">
+            <h1>Please Log In First Before Making an Regular Check Up Appointment</h1>
+            <a href="M_User_Login.php" class="btn btn-outline-danger" id="out">Log In</a>
         </div>
         <?php endif; ?>
     </div>

@@ -60,3 +60,16 @@
   .inputfeild span i{
         color: green;
         }
+
+ #outputBox{
+    height:450px;
+    width:600px;
+ }
+
+ #out{
+    margin:100px 0 100px 0;
+    height:80px;
+    width:550px;
+    font-size:40px;
+    font-weight: bold;
+ }

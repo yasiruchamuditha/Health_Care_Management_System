@@ -8,13 +8,7 @@
     <label for="option_select">Select an option:</label>
     <select name="option_select" id="option_select">
       <?php
-         $conn = mysqli_connect("localhost:3306", "root","DdCya995142@4681","helthcare" );
-
-        // Check connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-
+         
         // Retrieve options from the database and populate the select box
         $sql = "SELECT Email FROM user_registration";
         $result = $conn->query($sql);

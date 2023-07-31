@@ -1,10 +1,4 @@
 <?php
-$conn = mysqli_connect("localhost:3306", "root", "DdCya995142@4681", "helthcare");
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 // Initialize a variable to store the message to be displayed
 $message = '';
@@ -37,6 +31,6 @@ $conn->close();
 <body>
     <h1>Form Submission Result</h1>
     <p><?php echo $message; ?></p>
-    <p><a href="your_original_form_page.html">Go back to the form</a></p>
+    <p><a href="test.php">Go back to the form</a></p>
 </body>
 </html>

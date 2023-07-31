@@ -1,11 +1,15 @@
-<?php require_once('M_Connection.php');
+<?php
+require_once('M_Connection.php');
 session_start();
+
 // Define variables to store messages
 $alertMessage = '';
 $redirectLocation = '';
 
+// Check if the user is logged in
 if (isset($_SESSION["Email"])) {
     if (isset($_POST["btnSubmit"])) {
+        // Get form data
         $Patient_NIC = $_POST["txtPatient_NIC"];
         $Email = $_POST["txtEmail"];
         $Appointment_Date = $_POST["txtAppointment_Date"];
@@ -23,6 +27,7 @@ if (isset($_SESSION["Email"])) {
                 $redirectLocation = "index.php";
             }
         } else {
+            // Insert new appointment into the database
             $sql2 = "INSERT INTO Blood_Test (Patient_NIC, Email, Appointment_Date, Appointment_Time, Test_Type)
                      VALUES('$Patient_NIC', '$Email', '$Appointment_Date', '$Appointment_Time', '$Test_Type')";
 
@@ -42,6 +47,7 @@ if (isset($_SESSION["Email"])) {
     $alertMessage = "Please LogIn First Before Making an Appointment";
     $redirectLocation = "M_User_Login.php";
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +57,7 @@ if (isset($_SESSION["Email"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PR CARE - Blood Test</title>
     <!-- Template Main CSS File -->
-    <link href="css/P_Service_Page.css" rel="stylesheet">
+    <link href="css/service_page.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
@@ -145,9 +151,9 @@ if (isset($_SESSION["Email"])) {
         </form>
         </div>
         <?php else: ?>
-        <div class="container mt-3" id="outputBox">
-            <h1>Please Log In First Before Making a Blood Test Appointment</h1>
-            <a href="M_User_Login.php" class="btn btn-outline-danger" id="out">Log In</a>
+        <div class="container mt-3">
+            <h1>Please LogIn to the System Before Making an Appointment</h1>
+            <a href="M_User_Login.php" class="btn btn-outline-danger">LOG IN</a>
         </div>
         <?php endif; ?>
     </div>
