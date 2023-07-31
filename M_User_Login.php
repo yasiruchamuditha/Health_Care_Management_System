@@ -1,5 +1,4 @@
 <?php require('M_Connection.php');
-
 if(isset($_POST["btnSubmit"]))
 {
     session_start();

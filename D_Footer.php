@@ -1,10 +1,10 @@
-<?php //navigation bar forms?>
+<?php //footer ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Praroz Health Care</title>
+  <title>Praroz Health Care Website Tutorial - Index</title>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
   <!-- Vendor CSS Files -->
@@ -22,32 +22,24 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </head>
 <body>
-  <div style="margin-bottom:120px;">
- <!-- ======= Top Bar ======= -->
- <div id="topbar" class="d-flex align-items-center fixed-top">
-    <div class="container d-flex justify-content-between">
-      <div class="contact-info d-flex align-items-center">
-        <i class="bi bi-envelope"></i> <a href="mailto:contact@example.com">dinirathnayaka24@gmail.com</a>
-        <i class="bi bi-phone"></i> +941962409
-      </div>
-      <div class="d-none d-lg-flex social-links align-items-center">
-        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-        <a href="#" class="twitter"><i class="bi bi-whatsapp"></i></a>
-        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+<!-- ======= Footer ======= -->
+<footer id="footer" style="margin-top: 5px;">
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>PR-CARE</span></strong>.
+        &copy; Copyright <strong><span>THE_CODE</span></strong>. All Rights Reserved
       </div>
     </div>
-  </div>
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center">
-      <h1 class="logo me-auto"><a href="A_Admin_Panel.php">PR-CARE</a></h1>
-      <nav id="navbar" class="navbar order-last order-lg-0">
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-    </div>
-  </header><!-- End Header -->
-</div>
+  </footer><!-- End Footer -->
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <!-- Vendor JS Files -->
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="vendor/php-email-form/validate.js"></script>
+  <script src="vendor/purecounter/purecounter.js"></script>
+  <script src="vendor/swiper/swiper-bundle.min.js"></script>
+  <!-- Template Main JS File -->
+  <script src="js/main.js"></script>
 </body>
 </html>
