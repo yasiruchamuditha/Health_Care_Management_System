@@ -47,7 +47,7 @@ if(isset($_POST["btnSubmit"]))
         Enter this code to complete the reset of account Password.This code will expire in 24 hours.If you did not request this code, someone probably gave your email address by mistake. You can safely ignore this email.</p>
         <p>please <a href="fuelupgroup@gmail.com"><b><u>contact</u></b></a> us for more Details. </p>
         <p>Thanks for helping us keep your account secure.<br>Sincerely yours,<br>
-        The HealthUp Team</p><br>';
+        The PRCARE Team</p><br>';
         //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
     
         $mail->send();

@@ -65,7 +65,7 @@ $ret= mysqli_query($con, $sql);
         <b>Welcome back to your account.</b></p>
         <p>If you suspect you were locked out of your account because of changes made by someone else, please <a href="fuelupgroup@gmail.com"><b><u>contact</u></b></a> us immediately to protect your account.</p>
         <p>Thanks for helping us keep your account secure<br>Sincerely yours,<br>
-        The FuelUp Team</p>';
+        The PRCARE Team</p>';
         //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
     
         $mail->send();

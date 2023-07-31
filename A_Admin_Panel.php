@@ -130,7 +130,7 @@
 </div>
 
 </div>
-<?php require('footer.php');?>
+<?php require('A_Footer.php');?>
   <!-- Template Main JS File -->
   <script src="js/main.js"></script>
 </body>
