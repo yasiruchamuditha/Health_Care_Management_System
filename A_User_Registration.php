@@ -1,5 +1,5 @@
 <?php
-require_once('connection.php');
+require_once('M_Connection.php');
 
 // Define variables to store messages
 $alertMessage = '';
@@ -54,7 +54,7 @@ if (isset($_POST["btnSubmit"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin Panel - User Registration</title>
     <!-- Template Main CSS File -->
-    <link href="css/User_Registration.css" rel="stylesheet">
+    <link href="css/A_User_Reg.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
@@ -141,6 +141,6 @@ if (isset($_POST["btnSubmit"])) {
             </form>
         </div>
     </div>
-    <?php require('A_Footer.php'); ?>
+    <?php require('A_S_Footer.php'); ?>
 </body>
 </html>

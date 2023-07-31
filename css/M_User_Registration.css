@@ -21,11 +21,12 @@
     max-width: 600px;
     height: auto;
     width: 100%;
-    padding: 25px;
     border-radius: 8px;
     background:transparent;
     padding-top: 20px;
     border: 1px solid blue;
+    margin-top: 150px;
+    margin-bottom: 50px;
   }
   
   .form-label{
@@ -45,6 +46,7 @@
   #btnSubmit{
       font-size: 30px;
       margin-top: 30px;
+      margin-bottom: 50px;
   }
   
   .inputfeild span{

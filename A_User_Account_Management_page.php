@@ -1,5 +1,5 @@
 <?php
-require_once('connection.php');
+require_once('M_Connection.php');
 
 // Initialize the status message variable
 $statusMessage = '';

@@ -1,4 +1,4 @@
-<?php require('connection.php');
+<?php require('M_Connection.php');
 
 if(isset($_POST["btnSubmit"]))
 {
@@ -27,12 +27,12 @@ if(isset($_POST["btnSubmit"]))
                 if($row['User_Role'] == 'Admin')
                 {
                      $_SESSION['Email'] =  $Email;
-                     header('location:Admin.php'); 
+                     header('location:A_Admin_Panel.php'); 
                 }
                 elseif($row['User_Role'] == 'Doctor')
                 {
                      $_SESSION['Email'] =  $Email;
-                     header('location:doctors.php'); 
+                     header('location:D_Doctor_Panel.php'); 
                 }
                 elseif($row['User_Role'] == 'Patient') 
                 {
@@ -57,15 +57,15 @@ if(isset($_POST["btnSubmit"]))
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>User Login</title>
+<title>PR CARE - User Login</title>
 <!-- Template Main CSS File -->
-<link href="css/user_style.css" rel="stylesheet">
+<link href="css/M_User_Login.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </head>
 <body style="background-image: url(img/home.jpg);">
-<?php require('navigationBarForms.php');?>
-  <div class="container-fluid" id="containerm"  style="margin-top :150px ;margin-bottom :100px ;">
+<?php require('P_Navigation_Bar.php');?>
+  <div class="container-fluid" id="containerm" >
   <!-- Form start -->
 	<div class="container mt-4" >
     <h1 >LOG IN</h1>
@@ -83,21 +83,21 @@ if(isset($_POST["btnSubmit"]))
     <span id="Password_Error"></span>
   </div>
 <!--Check Terms -->
-  <div class="inputfeild mt-4 mx-2 form-check">
+  <div class="inputfeild mt-4 form-check">
     <input type="checkbox" class="form-check-input" name="chkCheck" id="chStatus" onkeyup="validateTerms()"  >
     <label class="form-check-label" for="checkbox">Agree to Terms and Conditions</label><br>
     <span id="Check_Error"></span>
   </div>
   <div class="inputfeild mt-4">
-    <label for="ForgottenPassword" class="form-label" ><a href="forgotten_Password.php" target="_blank" style="color: Black;">Forgotten Password ? Click Here. </a></label><br>
-    <label for="Signup" class="form-label" ><a href="user_Registration.php" target="_blank" style="color: Black;">Don't Have Account ? Click Here. </a></label><br>
+    <label for="ForgottenPassword" class="form-label" ><a href="M_Forgotten_Password.php" target="_blank" id="forgotten"  >Forgotten Password ? Click Here. </a></label><br>
+    <label for="Signup" class="form-label" ><a href="M_User_Registration.php" target="_blank"  id="signup" >Don't Have Account ? Click Here. </a></label><br>
   </div>  
  <!--Button-->
   <button type="submit" class="btn btn-outline-primary btn-lg" id="btnSubmit" name="btnSubmit" >Submit</button>
 </form>
 </div>
 </div>
-<?php require('footer.php');?>
+<?php require('P_Footer.php');?>
 <script type="text/javascript">
 var UserEmail_Error=document.getElementById('UserEmail_Error');  
 var Password_Error=document.getElementById('Password_Error');

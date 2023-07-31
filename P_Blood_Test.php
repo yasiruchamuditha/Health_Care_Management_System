@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blood Test</title>
+    <title>PR CARE - Blood Test</title>
     <!-- Add Bootstrap CSS link -->
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
@@ -11,7 +11,7 @@
     <link href="css/service_page.css" rel="stylesheet">
 </head>
 <body style="background-image: url(img/home.jpg);">
-<?php require('navigationBarForms.php');?>
+<?php require('P_Navigation_Bar.php');?>
 <div class="container-fluid" id="containerm" >
     <div class="container mt-2">
         <h1 class="mb-4">Blood Test - Appointment</h1>
@@ -27,12 +27,12 @@
             </div>
 
             <div class="inputfeild mb-3">
-                <label for="appointment_date" class="form-label">Preferred Appointment Date:</label>
+                <label for="appointment_date" class="form-label">Preferred Test Date:</label>
                 <input type="date" id="appointment_date" name="appointment_date" class="form-control" required>
             </div>
 
             <div class="inputfeild mb-3">
-                <label for="appointment_time" class="form-label">Preferred Appointment Time:</label>
+                <label for="appointment_time" class="form-label">Preferred Test Time:</label>
                 <input type="time" id="appointment_time" name="appointment_time" class="form-control" required>
             </div>
 
@@ -40,13 +40,19 @@
                 <label for="doctor" class="form-label">Test Type:</label>
                 <select id="doctor" name="doctor" class="form-select" required>
                     <option value="" disabled selected>Select a Type</option>
-                    <option value="FBS">FBC</option>
-                    <option value="Type02">Type 02</option>
+                    <option value="CBC">Complete Blood Count</option>
+                    <option value="LP">Lipid Profile</option>
+                    <option value="BGTs">Blood Glucose Test</option>
+                    <option value="LFTs">Liver Function Tests (LFTs)</option>
+                    <option value="KFTs">Kidney Function Tests</option>
+                    <option value="TFTs">Thyroid Function Tests</option>
+                    <option value="IS">Iron Studies</option>
+                    <option value="VDTs">Vitamin D Test</option>
+                    <option value="BCTs">Blood Coagulation Tests (PT, INR)</option>
+                    <option value="ABTs">Allergy Blood Tests</option>
+                    <option value="RFTs">Rheumatoid Factor (RF) Test</option>
+                    <option value="CPRTs">C-reactive Protein (CRP) Test</option>
                 </select>
-            </div>
-            <div class="inputfeild mb-3">
-                <label for="reason_for_appointment" class="form-label">Reason for Appointment:</label>
-                <textarea id="reason_for_appointment" name="reason_for_appointment" class="form-control" required></textarea>
             </div>
             <div class="inputfeild">
            <!--Button-->
@@ -55,6 +61,6 @@
         </form>
     </div>
 </div>
-    <?php require('footer.php');?>
+    <?php require('P_Footer.php');?>
 </body>
 </html>

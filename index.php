@@ -56,7 +56,7 @@
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-       <a href="user_Login.php" class="appointment-btn scrollto"><span class="d-none d-md-inline">LOG IN</span></a>
+       <a href="M_User_Login.php" class="appointment-btn scrollto"><span class="d-none d-md-inline">LOG IN</span></a>
     </div>
   </header><!-- End Header -->
 
@@ -219,7 +219,7 @@
               <div class="icon"><i class="fas fa-heartbeat"></i></div>
               <h4><a href="">Regular Checkup</a></h4>
               <p>Reserved Your Regular Check Appoinment.</p>
-               <a href="Regular_Checkup.php" class="btn btn-primary mt-5">Reserve Now</a>
+               <a href="P_Regular_Checkup.php" class="btn btn-primary mt-5">Reserve Now</a>
             </div>
           </div>
 
@@ -228,7 +228,7 @@
               <div class="icon"><i class="fas fa-pills"></i></div>
               <h4><a href="">Doctor Appoinment</a></h4>
               <p>Reserve Your Doctor Appoinment</p>
-               <a href="Doctor_Appoinment.php" class="btn btn-primary mt-5">Reserve Now</a>
+               <a href="P_Doctor_Appoinment.php" class="btn btn-primary mt-5">Reserve Now</a>
             </div>
           </div>
 
@@ -237,7 +237,7 @@
               <div class="icon"><i class="fas fa-hospital-user"></i></div>
               <h4><a href="">Dental Appoinement </a></h4>
               <p>Reserve Your Dental Appoinment</p>
-               <a href="Dental_Appointment.php" class="btn btn-primary mt-5">Reserve Now</a>
+               <a href="P_Dental_Appointment.php" class="btn btn-primary mt-5">Reserve Now</a>
             </div>
           </div>
 
@@ -246,7 +246,7 @@
               <div class="icon"><i class="fas fa-dna"></i></div>
               <h4><a href="">Blood Test</a></h4>
               <p>Reserve Your Blood Test Appoinment</p>
-               <a href="Blood_Test.php" class="btn btn-primary mt-5">Reserve Now</a>
+               <a href="P_Blood_Test.php" class="btn btn-primary mt-5">Reserve Now</a>
             </div>
           </div>
 
@@ -255,7 +255,7 @@
               <div class="icon"><i class="fas fa-wheelchair"></i></div>
               <h4><a href="">Physiotherapy Sessions</a></h4>
               <p>Reserve Your Physiotherapy Appoinment </p>
-               <a href="Physiotherapy.php" class="btn btn-primary mt-5">Reserve Now</a>
+               <a href="P_Physiotherapy.php" class="btn btn-primary mt-5">Reserve Now</a>
             </div>
           </div>
           
@@ -264,7 +264,7 @@
               <div class="icon"><i class="fas fa-notes-medical"></i></div>
               <h4><a href="">Public Health</a></h4>
               <p>MImprove Your Health Knowledge</p>
-               <a href="Public_Health.php" class="btn btn-primary mt-5">Check Now</a>
+               <a href="P_Public_Health.php" class="btn btn-primary mt-5">Check Now</a>
             </div>
           </div>
 

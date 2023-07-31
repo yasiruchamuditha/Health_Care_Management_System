@@ -1,4 +1,4 @@
-<?php require_once('connection.php');
+<?php require_once('M_Connection.php');
 if(isset($_POST["btnSubmit"]))
 {
     $Name=$_POST["txtName"];
@@ -31,13 +31,13 @@ if(isset($_POST["btnSubmit"]))
          {
           echo "<script>alert('Login successful!');</script>";
           //location after sign up
-          header('location:user_Login.php');
+          header('location:M_User_Login.php');
          }
          else
          {
             echo '<script>alert("Please Try Again Shortly....")</script>';
             //location after sign up
-            header('location:user_Registration.php');
+            header('location:M_User_Registration.php');
          }
         //disconnect 
          mysqli_close($con);
@@ -45,7 +45,7 @@ if(isset($_POST["btnSubmit"]))
         else
         {
           echo "<script>alert('Invalid username or password. Please try again');</script>";
-          header('location:user_Registration.php');
+          header('location:M_User_Registration.php');
         }
     }
 }    
@@ -58,12 +58,12 @@ if(isset($_POST["btnSubmit"]))
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>User Registration</title>
 <!-- Template Main CSS File -->
-<link href="css/User_Registration.css" rel="stylesheet">
+<link href="css/M_User_Registration.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </head>
 <body style="background-image: url(img/home.jpg);">
-<?php require('navigationBarForms.php');?>
+<?php require('P_Navigation_Bar.php');?>
   <div class="container-fluid" id="containerm">
   <!-- Form start -->
   <div class="container mt-3">
@@ -103,6 +103,6 @@ if(isset($_POST["btnSubmit"]))
     </form>
  </div>
 </div>
-<?php require('footer.php');?>
+<?php require('P_Footer.php');?>
 </body>
 </html>

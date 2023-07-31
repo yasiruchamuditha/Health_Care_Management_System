@@ -21,12 +21,13 @@
     max-width: 600px;
     height: auto;
     width: 100%;
+    padding: 25px;
     border-radius: 8px;
     background:transparent;
     padding-top: 20px;
+    margin-top :150px ;
+    margin-bottom :100px ;
     border: 1px solid blue;
-    margin-top: 100px;
-    margin-bottom: 10px;
   }
   
   .form-label{
@@ -36,8 +37,8 @@
       color: black;
   }
   .form-check-label{
-      margin-left: 20px;
-      color: darkred;
+      margin-left: 3px;
+      color: black;
   }
   .form-text{
       color: black;
@@ -46,15 +47,24 @@
   #btnSubmit{
       font-size: 30px;
       margin-top: 30px;
-      margin-bottom: 50px;
   }
   
   .inputfeild span{
          color: red;
-         margin-top: 5PX; 
+         margin-top: 8PX; 
         }
       
   
   .inputfeild span i{
         color: green;
         }
+
+    #forgotten{
+        color: Black;
+    }
+
+    #signup{
+        color: Black;
+    }
+
+    
