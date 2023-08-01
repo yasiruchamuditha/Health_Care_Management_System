@@ -1,5 +1,4 @@
 <?php require_once('M_Connection.php');
-session_start();
 
 // Define variables to store messages
 $alertMessage = '';
@@ -14,10 +13,9 @@ if (isset($_POST["btnSubmit"]))
     $User_Role = $_POST["User_Role"];
     $Gender = $_POST["gender"];
     $Password = $_POST["txtPassword"];
-    $Confirm_Password = $_POST["txtConfirm_Password"];
     $Verification = "NotVerified";
 
-    //perform sql to find this email is registered in the website
+    // Perform SQL to find if this email is registered in the website
     $sql1 = "SELECT * FROM user_registration WHERE NIC='$NIC' ";
     $ret1 = mysqli_query($con, $sql1);
     $num_row = mysqli_num_rows($ret1);
@@ -27,13 +25,11 @@ if (isset($_POST["btnSubmit"]))
        if($row['NIC'] == $NIC)
        {
            $alertMessage = "There are already accounts registered under this NIC.";
-           $redirectLocation = "M_User_Login.php";
+           $redirectLocation = "A_Patient_Management_Page.php";
        } 
     }   
     else 
     {
-        if ($Password == $Confirm_Password) 
-        {
             //perform SQL
             $sql2 = "INSERT INTO user_registration (Name, Email, NIC, Contact_No, User_Role, Gender, Password, Verification)
             VALUES('$Name', '$Email', '$NIC', $Contact_No, '$User_Role', '$Gender', '$Password', '$Verification')";
@@ -42,22 +38,16 @@ if (isset($_POST["btnSubmit"]))
             if ($result2 > 0)
             {
                 $alertMessage = "Registration successful!";
-                $redirectLocation = "M_User_Login.php";
+                $redirectLocation = "A_Patient_Management_Page.php";
             } 
             else 
             {
                 $alertMessage = "Please Try Again Shortly....";
-                $redirectLocation = "M_User_Login.php";
+                $redirectLocation = "A_Patient_Management_Page.php";
             }
-        } 
-        else 
-        {
-            $alertMessage = "Invalid username or password. Please try again";
-            $redirectLocation = "M_User_Login.php";
-        }
+    } 
         // Disconnect 
         mysqli_close($con);
-    }
 }
 ?>
 
@@ -66,34 +56,56 @@ if (isset($_POST["btnSubmit"]))
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PR CARE - Regular Checkup</title>
+    <title>PR CARE- Patient Registration</title>
     <!-- Template Main CSS File -->
-    <link href="css/M_User_Registration.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="css/A_User_Reg.css" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </head>
 <body style="background-image: url(img/home.jpg);">
-<?php require('P_Navigation_Bar.php');?>
+<?php require('A_Navigation_Bar.php'); ?>
     <div class="container-fluid" id="containerm">
+        <!-- Form start -->
         <div class="container mt-3">
-        <h1>User Registration</h1>
+            <h1>Admin Panel - Patient Registration</h1>
             <?php if (!empty($alertMessage)) : ?>
-                <div class="alert alert-<?php echo ($redirectLocation === 'M_User_Login.php' ? 'success' : 'danger'); ?>">
-                    <?php echo $alertMessage; ?>
+                <div class="modal fade" id="outputModal" tabindex="-1" aria-labelledby="outputModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="outputModalLabel">Output Message</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <?php echo $alertMessage; ?>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <?php if ($redirectLocation === 'M_User_Login.php'): ?>
-                    <script>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        var modal = new bootstrap.Modal(document.getElementById('outputModal'));
+                        modal.show();
                         // Redirect after displaying the message
-                        setTimeout(function () {
-                            window.location.href = '<?php echo $redirectLocation; ?>';
-                        }, 2000); // Redirect after 3 seconds (adjust as needed)
-                    </script>
-                <?php endif; ?>
+                        var redirectLocation = '<?php echo $redirectLocation; ?>';
+                        if (redirectLocation) {
+                            setTimeout(function () {
+                                window.location.href = redirectLocation;
+                            }, 3000); // Redirect after 3 seconds (adjust as needed)
+                        }
+                    });
+                </script>
             <?php endif; ?>
-        <form class="row g-3 needs-validation" name="frmUserRegistration" method="post" autocomplete="off" action="#"  onsubmit="return result()" >
+            <form class="row g-3 needs-validation" name="frmUserRegistration" method="post" autocomplete="off" action="#"  onsubmit="return result()" >
             <div class="inputfeild mt-3 ">
                 <label  class="form-label mb-2">Name:</label>
                 <input type="text" class="form-control" name="txtName" id="txtName"  placeholder="Enter Your First Name" onkeyup="validateName()">
@@ -114,15 +126,9 @@ if (isset($_POST["btnSubmit"]))
                 <input type="text" class="form-control" name="txtTelephoneNo" id="txtTelephoneNo"  placeholder="Enter Your Telephone No" onkeyup="validateTelephoneNo()">
                 <span id="TelephoneNo_Error"></span>
             </div>
-            <div class="inputfeild mt-3" >
+          <div class="inputfeild mt-3" >
            <label for="UserRole" class="form-label mb-2">I am ..</label>
-             <select name="User_Role"  id="User_Role"  class="role form-control" style="height: 50px;" onkeyup="validate_User_Role()" >
-               <option selected value="S">Choose..</option>
-               <option value="Doctor">Doctor</option>
-               <option value="Patient">Patient</option>
-               <option value="Admin">Admin</option>
-             </select>
-             <span id="UserRole_Error"></span>
+           <input type="text" class="form-control" name="User_Role" id="User_Role" readonly value="Patient" placeholder="Enter Your Telephone No" >
           </div>
           <div class="inputfeild mt-3">
               <label class="form-label mb-2">Gender:</label>
@@ -133,30 +139,22 @@ if (isset($_POST["btnSubmit"]))
           </div>
             <div class="inputfeild mt-3 ">
                 <label  class="form-label mb-2">Password:</label>
-                <input type="text" class="form-control" name="txtPassword" id="txtPassword" placeholder="Enter Password" onkeyup="validatePassword()">
-                <span id="Password_Error"></span>
+                <input type="text" class="form-control" name="txtPassword" id="txtPassword" value="1234@qwQW" readonly placeholder="Enter Password" onkeyup="validatePassword()">
+                <label for="UserRole" class="form-label mb-2">Default Password For All Accounts.</label>
             </div>
-            <div class="inputfeild mt-3 ">
-                <label  class="form-label mb-2">Confirm Password:</label>
-                <input type="text" class="form-control" name="txtConfirm_Password" id="txtConfirm_Password" placeholder="Please Confirm Password" onkeyup="validateConfirm_Password()">
-                <span id="Confirm_Password_Error"></span>
-            </div>
+        
         <!--Button-->
         <button type="submit" class="btn btn-outline-primary btn-lg " id="btnSubmit" name="btnSubmit" >Submit Details</button>
     </form>
-        </div>
     </div>
-    <?php require('P_Footer.php'); ?>
+    </div>
+    <?php require('A_S_Footer.php'); ?>
   <script type="text/javascript">
     var Name_Error=document.getElementById('Name_Error');  
     var UserEmail_Error=document.getElementById('UserEmail_Error');
     var NIC_Error=document.getElementById('NIC_Error');
     var TelephoneNo_Error=document.getElementById('TelephoneNo_Error');  
-    var UserRole_Error = document.getElementById('UserRole_Error');
     var Gender_Error = document.getElementById('Gender_Error');
-    var Password_Error=document.getElementById('Password_Error');
-    var Confirm_Password_Error=document.getElementById('Confirm_Password_Error');
-
 
 function validateName()
 {
@@ -219,25 +217,6 @@ function validateTelephoneNo()
   return true;
 }
 
-function validate_User_Role()
-{
-if(document.getElementById("User_Role").value == "S")
-{
-    UserRole_Error.innerHTML='User Role is required.';
-    return false;
-}
-   UserRole_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
-   return true;
-}
-  
-document.getElementById("User_Role").addEventListener("click", function() {
-
-  if (document.getElementById("User_Role").value != "S") {
-
-    UserRole_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
-  return true;
-}
-});
 
   function validate_gender() 
   {
@@ -261,51 +240,6 @@ if (document.getElementById("Gender_Male").checked == true || document.getElemen
    return true;
 }
 });
-/*
-
-document.getElementById("Gender_Female").addEventListener("click", function() {
-
-if (document.getElementById("Gender_Female").checked == true ) {
-
-    Gender_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
-   return true;
-}
-});
-
-document.getElementById("Gender_Other").addEventListener("click", function() {
-
-if (document.getElementById("Gender_Other").checked == true ) {
-
-    Gender_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
-   return true;
-}
-});*/
-
-function validatePassword()
-{
-  var Password=document.getElementById('txtPassword').value.replace(/^\s+|\s+$/g, "");
-  if(Password.length == 0)
-  {
-    Password_Error.innerHTML='Password is required.';
-    return false;
-  }
-  Password_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
-  return true;
-}
-
-function validateConfirm_Password()
-{
-  
-  var Confirm_Password=document.getElementById('txtConfirm_Password').value.replace(/^\s+|\s+$/g, "");
-  if(Confirm_Password.length == 0)
-  {
-    Confirm_Password_Error.innerHTML=' Confirm Password is required.';
-    return false;
-  }
-  Confirm_Password_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
-  return true;
-}
-
 
 function result()
 {
@@ -313,12 +247,9 @@ function result()
   validateUserEmail();
   validateNIC();
   validateTelephoneNo();
-  validate_User_Role();
   validate_gender();
-  validatePassword();
-  validateConfirm_Password();
 
-if((!validateName()) || (!validateUserEmail()) || (!validateNIC()) || (!validateTelephoneNo()) || (!validate_User_Role()) || (!validate_gender()) ||  (!validatePassword()) || (!validateConfirm_Password()))
+if((!validateName()) || (!validateUserEmail()) || (!validateNIC()) || (!validateTelephoneNo()) || (!validate_gender()))
 {
    return false;
 }

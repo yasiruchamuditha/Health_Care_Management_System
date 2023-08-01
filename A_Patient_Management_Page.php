@@ -27,7 +27,7 @@ if (isset($_POST['btnDelete'])) {
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Admin Panel - User Account Management</title>
+    <title>PR CARE- Patient Management</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <!-- Vendor CSS Files -->
@@ -48,7 +48,7 @@ if (isset($_POST['btnDelete'])) {
     <?php require('A_Navigation_Bar.php'); ?>
     <div class="container" style="margin-top: 100px;">
         <h1>Admin Panel - Patient Profile Management</h1>
-        <p class="header">Add New Patient Profiles - <a href="A_User_Registration.php" class="btn btn-primary text-light">Click Here</a></p>
+        <p class="header">Add New Patient Profiles - <a href="A_Patient_Registration.php" class="btn btn-primary text-light">Click Here</a></p>
         <p class="header">PR Patients Profiles</p>
         <table class="table">
             <thead>
@@ -56,6 +56,7 @@ if (isset($_POST['btnDelete'])) {
                     <th scope="col">Name</th>
                     <th scope="col">Contact No</th>
                     <th scope="col">Email</th>
+                    <th scope="col">NIC</th>
                     <th scope="col">Gender</th>
                     <th scope="col">Operation</th>
                 </tr>
@@ -69,12 +70,14 @@ if (isset($_POST['btnDelete'])) {
                         $Name = htmlspecialchars($row['Name']);
                         $Contact_No = htmlspecialchars($row['Contact_No']);
                         $Email = htmlspecialchars($row['Email']);
+                        $NIC = htmlspecialchars($row['NIC']);
                         $Gender = htmlspecialchars($row['Gender']);
 
                         echo '<tr>
                             <th scope="row">' . $Name . '</th>
                             <td>' . $Contact_No . '</td>
                             <td>' . $Email . '</td>
+                            <td>' . $NIC . '</td>
                             <td>' . $Gender . '</td>
                             <td>
                                 <form method="post">
