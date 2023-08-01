@@ -5,6 +5,7 @@ if(isset($_POST["btnSubmit"]))
     $Email=$_POST["txtUSerEmail"];
     $Contact_No=$_POST["txtTelephoneNo"];
     $User_Role=$_POST["User_Role"];
+    $Gender=$_POST["gender"];
     $Password=$_POST["txtPassword"];
     $Confirm_Password=$_POST["txtConfirm_Password"]; 
     $Verification="NotVerified";
@@ -23,8 +24,8 @@ if(isset($_POST["btnSubmit"]))
         if($Password==$Confirm_Password)
         {
         //perform sql
-         $sql = "INSERT INTO user_registration (Name,Email,Contact_No,User_Role,Password,Verification)
-                 VALUES('$Name','$Email',$Contact_No,'$User_Role','$Password','$Verification')";
+         $sql = "INSERT INTO user_registration (Name,Email,Contact_No,User_Role,Gender,Password,Verification)
+                 VALUES('$Name','$Email',$Contact_No,'$User_Role','$Gender','$Password','$Verification')";
 
          $ret= mysqli_query($con, $sql);
          if ($ret > 0)
@@ -89,6 +90,12 @@ if(isset($_POST["btnSubmit"]))
                <option value="Patient">Patient</option>
                <option value="Admin">Admin</option>
              </select>
+          </div>
+          <div class="inputfeild mt-3">
+              <label class="form-label mb-2">Gender:</label>
+              <input type="radio" name="gender" value="Male" required> Male
+              <input type="radio" name="gender" value="Female" required> Female
+             <input type="radio" name="gender" value="Other" required> Other
           </div>
             <div class="inputfeild mt-3 ">
                 <label  class="form-label mb-2">Password:</label>

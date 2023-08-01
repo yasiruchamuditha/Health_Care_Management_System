@@ -228,7 +228,7 @@
               <div class="icon"><i class="fas fa-pills"></i></div>
               <h4><a href="">Doctor Appoinment</a></h4>
               <p>Reserve Your Doctor Appoinment</p>
-               <a href="P_Doctor_Selection.php" class="btn btn-primary mt-5">Reserve Now</a>
+               <a href="PD_Selection_page.php" class="btn btn-primary mt-5">Reserve Now</a>
             </div>
           </div>
 

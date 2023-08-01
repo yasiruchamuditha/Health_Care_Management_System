@@ -47,35 +47,35 @@ if (isset($_POST['btnDelete'])) {
     <!-- Navigation bar code is missing, add it here -->
     <?php require('A_Navigation_Bar.php'); ?>
     <div class="container" style="margin-top: 100px;">
-        <h1>Admin Panel - User Profile Management</h1>
-        <p class="header">Add New User Profiles - <a href="A_User_Registration.php" class="btn btn-primary text-light">Click Here</a></p>
-        <p class="header">PR User Profiles [Doctor Profiles, Patient Users Profiles, Admin Profiles]</p>
+        <h1>Admin Panel - Admin Profile Management</h1>
+        <p class="header">Add New Admin Profiles - <a href="A_User_Registration.php" class="btn btn-primary text-light">Click Here</a></p>
+        <p class="header">PR Admin Profiles</p>
         <table class="table">
             <thead>
                 <tr class="table-info">
                     <th scope="col">Name</th>
                     <th scope="col">Contact No</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Password</th>
+                    <th scope="col">Gender</th>
                     <th scope="col">Operation</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $sql = "SELECT * FROM user_registration";
+                $sql = "SELECT * FROM user_registration WHERE User_Role = 'Admin'";
                 $ret = mysqli_query($con, $sql);
                 if ($ret) {
                     while ($row = mysqli_fetch_assoc($ret)) {
                         $Name = htmlspecialchars($row['Name']);
                         $Contact_No = htmlspecialchars($row['Contact_No']);
                         $Email = htmlspecialchars($row['Email']);
-                        $Password = htmlspecialchars($row['Password']);
+                        $Gender = htmlspecialchars($row['Gender']);
 
                         echo '<tr>
                             <th scope="row">' . $Name . '</th>
                             <td>' . $Contact_No . '</td>
                             <td>' . $Email . '</td>
-                            <td>' . $Password . '</td>
+                            <td>' . $Gender . '</td>
                             <td>
                                 <form method="post">
                                     <input type="hidden" name="deleteid" value="' . $Email . '">

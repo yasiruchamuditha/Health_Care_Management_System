@@ -6,20 +6,41 @@
   <title>PR CARE- Admin Panel</title>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-  <!-- Vendor CSS Files -->
-  <link href="vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-  <link href="vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
    <!-- bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
   <!-- Template Main CSS File -->
   <link href="css/style.css" rel="stylesheet">
+  <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px 5px 0 0;
+            margin-right: 10px;
+        }
+        .tab.active {
+            background-color: #0056b3;
+        }
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid #007BFF;
+            border-radius: 0 0 5px 5px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
 </head>
 <body>
 <?php require('A_Navigation_Bar.php');?>
@@ -130,6 +151,29 @@
 </div>
 
 </div>
+
+<form action="test67.php" method="post" id="specializationForm">
+        <input type="hidden" name="specialization" id="specializationInput">
+    </form>
+
+    <script>
+        function showTab(specialization) {
+            const tabs = document.getElementsByClassName('tab');
+            const tabContents = document.getElementsByClassName('tab-content');
+
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+                tabContents[i].classList.remove('active');
+            }
+
+            document.getElementById(specialization).classList.add('active');
+            event.currentTarget.classList.add('active');
+
+            // Set the selected specialization in the hidden input field and submit the form
+            document.getElementById('specializationInput').value = specialization;
+            document.getElementById('specializationForm').submit();
+        }
+    </script>
 <?php require('A_Footer.php');?>
   <!-- Template Main JS File -->
   <script src="js/main.js"></script>
