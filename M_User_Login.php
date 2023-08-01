@@ -89,7 +89,7 @@ if(isset($_POST["btnSubmit"]))
   </div>
   <div class="inputfeild mt-4">
     <label for="ForgottenPassword" class="form-label" ><a href="M_Forgotten_Password.php" target="_blank" id="forgotten"  >Forgotten Password ? Click Here. </a></label><br>
-    <label for="Signup" class="form-label" ><a href="M_User_Registration.php.php" target="_blank"  id="signup" >Don't Have Account ? Click Here. </a></label><br>
+    <label for="Signup" class="form-label" ><a href="M_User_Registration.php" target="_blank"  id="signup" >Don't Have Account ? Click Here. </a></label><br>
   </div>  
  <!--Button-->
   <button type="submit" class="btn btn-outline-primary btn-lg" id="btnSubmit" name="btnSubmit" >Submit</button>

@@ -28,7 +28,7 @@ if (isset($_POST["btnSubmit"]))
        if($row['NIC'] == $NIC)
        {
            $alertMessage = "There are already accounts registered under this NIC.";
-           $redirectLocation = "index.php";
+           $redirectLocation = "M_User_Login.php";
        } 
     }   
     else 
@@ -48,13 +48,13 @@ if (isset($_POST["btnSubmit"]))
             else 
             {
                 $alertMessage = "Please Try Again Shortly....";
-                $redirectLocation = "index.php";
+                $redirectLocation = "M_User_Login.php";
             }
         } 
         else 
         {
             $alertMessage = "Invalid username or password. Please try again";
-            $redirectLocation = "index.php";
+            $redirectLocation = "M_User_Login.php";
         }
         // Disconnect 
         mysqli_close($con);
@@ -69,7 +69,8 @@ if (isset($_POST["btnSubmit"]))
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PR CARE - Regular Checkup</title>
     <!-- Template Main CSS File -->
-    <link href="css/P_Service_Page.css" rel="stylesheet">
+    <link href="css/M_User_Registration.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
@@ -81,62 +82,64 @@ if (isset($_POST["btnSubmit"]))
         <div class="container mt-3">
         <h1>User Registration</h1>
             <?php if (!empty($alertMessage)) : ?>
-                <div class="alert alert-<?php echo ($redirectLocation === 'index.php' ? 'success' : 'danger'); ?>">
+                <div class="alert alert-<?php echo ($redirectLocation === 'M_User_Login.php' ? 'success' : 'danger'); ?>">
                     <?php echo $alertMessage; ?>
                 </div>
-                <?php if ($redirectLocation === 'index.php'): ?>
+                <?php if ($redirectLocation === 'M_User_Login.php'): ?>
                     <script>
                         // Redirect after displaying the message
                         setTimeout(function () {
                             window.location.href = '<?php echo $redirectLocation; ?>';
-                        }, 3000); // Redirect after 3 seconds (adjust as needed)
+                        }, 2000); // Redirect after 3 seconds (adjust as needed)
                     </script>
                 <?php endif; ?>
             <?php endif; ?>
             <form class="row g-3 needs-validation" name="frmUserRegistration" method="post" autocomplete="off" action="#"  onsubmit="return result()" >
             <div class="inputfeild mt-3 ">
                 <label  class="form-label mb-2">Name:</label>
-                <input type="text" class="form-control" name="txtName" placeholder="Enter Your First Name" onkeyup="validateName()">
+                <input type="text" class="form-control" name="txtName" id="txtName"  placeholder="Enter Your First Name" onkeyup="validateName()">
                 <span id="Name_Error"></span>
             </div>
             <div class="inputfeild mt-3 ">
                 <label class="form-label mb-2">UserEmail:</label>
-                <input type="email" class="form-control" name="txtUSerEmail" placeholder="Enter Your UserEmail" onkeyup="validateUserEmail()" >
+                <input type="email" class="form-control" name="txtUSerEmail" id="txtUSerEmail" placeholder="Enter Your UserEmail" onkeyup="validateUserEmail()" >
                 <span id="UserEmail_Error"></span>
             </div>
             <div class="inputfeild mt-3 ">
                 <label class="form-label mb-2">NIC:</label>
-                <input type="text" class="form-control" name="txtNIC" placeholder="Enter Your NIC" onkeyup="validateNIC()" >
+                <input type="text" class="form-control" name="txtNIC" id="txtNIC" placeholder="Enter Your NIC" onkeyup="validateNIC()" >
                 <span id="NIC_Error"></span>
             </div>
             <div class="inputfeild mt-3 ">
                 <label  class="form-label mb-2">Telephone No:</label>
-                <input type="text" class="form-control" name="txtTelephoneNo" placeholder="Enter Your Telephone No" onkeyup="validateTelephoneNo()">
+                <input type="text" class="form-control" name="txtTelephoneNo" id="txtTelephoneNo"  placeholder="Enter Your Telephone No" onkeyup="validateTelephoneNo()">
                 <span id="TelephoneNo_Error"></span>
             </div>
             <div class="inputfeild mt-3" >
            <label for="UserRole" class="form-label mb-2">I am ..</label>
-             <select id="UserRole" name="User_Role"  class="role form-control" style="height: 50px;" required>
+             <select name="User_Role"  id="User_Role"  class="role form-control" style="height: 50px;" onkeyup="validate_User_Role()" >
                <option selected value="S">Choose..</option>
                <option value="Doctor">Doctor</option>
                <option value="Patient">Patient</option>
                <option value="Admin">Admin</option>
              </select>
+             <span id="UserRole_Error"></span>
           </div>
           <div class="inputfeild mt-3">
               <label class="form-label mb-2">Gender:</label>
-              <input type="radio" name="gender" value="Male" required> Male
-              <input type="radio" name="gender" value="Female" required> Female
-             <input type="radio" name="gender" value="Other" required> Other
+              <input type="radio" name="gender" value="Male" id="Gender_Male" onkeyup="validate_gender()"> Male
+              <input type="radio" name="gender" value="Female" id="Gender_Female" onkeyup="validate_gender()"> Female
+             <input type="radio" name="gender" value="Other" id="Gender_Other" onkeyup="validate_gender()"> Other<br>
+             <span id="Gender_Error"></span>
           </div>
             <div class="inputfeild mt-3 ">
                 <label  class="form-label mb-2">Password:</label>
-                <input type="text" class="form-control" name="txtPassword" placeholder="Enter Password" onkeyup="validatePassword()">
+                <input type="text" class="form-control" name="txtPassword" id="txtPassword" placeholder="Enter Password" onkeyup="validatePassword()">
                 <span id="Password_Error"></span>
             </div>
             <div class="inputfeild mt-3 ">
                 <label  class="form-label mb-2">Confirm Password:</label>
-                <input type="text" class="form-control" name="txtConfirm_Password" placeholder="Please Confirm Password" onkeyup="validateConfirm_Password()">
+                <input type="text" class="form-control" name="txtConfirm_Password" id="txtConfirm_Password" placeholder="Please Confirm Password" onkeyup="validateConfirm_Password()">
                 <span id="Confirm_Password_Error"></span>
             </div>
         <!--Button-->
@@ -150,6 +153,8 @@ if (isset($_POST["btnSubmit"]))
     var UserEmail_Error=document.getElementById('UserEmail_Error');
     var NIC_Error=document.getElementById('NIC_Error');
     var TelephoneNo_Error=document.getElementById('TelephoneNo_Error');  
+    var UserRole_Error = document.getElementById('UserRole_Error');
+    var Gender_Error = document.getElementById('Gender_Error');
     var Password_Error=document.getElementById('Password_Error');
     var Confirm_Password_Error=document.getElementById('Confirm_Password_Error');
 
@@ -160,7 +165,7 @@ function validateName()
   var Name=document.getElementById('txtName').value.replace(/^\s+|\s+$/g, "");
   if(Name.length == 0)
   {
-    Name_Error.innerHTML='Password is required.';
+    Name_Error.innerHTML='Name is required.';
     return false;
   }
   Name_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
@@ -169,7 +174,7 @@ function validateName()
 
 function validateUserEmail()
 {
-  var Email = document.getElementById('txtUserEmail').value.replace(/^\s+|\s+$/g, "");
+  var Email = document.getElementById('txtUSerEmail').value.replace(/^\s+|\s+$/g, "");
 
   if (Email.length == 0) 
   {
@@ -189,9 +194,96 @@ function validateUserEmail()
   }  
 }
 
-function validatePassword()
+function validateNIC()
 {
   
+  var NIC=document.getElementById('txtNIC').value.replace(/^\s+|\s+$/g, "");
+  if(NIC.length == 0)
+  {
+    NIC_Error.innerHTML='NIC is required.';
+    return false;
+  }
+  NIC_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
+  return true;
+}
+
+function validateTelephoneNo()
+{
+  
+  var TelephoneNo=document.getElementById('txtTelephoneNo').value.replace(/^\s+|\s+$/g, "");
+  if(TelephoneNo.length == 0)
+  {
+    TelephoneNo_Error.innerHTML='Telephone No is required.';
+    return false;
+  }
+  TelephoneNo_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
+  return true;
+}
+
+function validate_User_Role()
+{
+if(document.getElementById("User_Role").value == "S")
+{
+    UserRole_Error.innerHTML='User Role is required.';
+    return false;
+}
+   UserRole_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
+   return true;
+}
+  
+document.getElementById("User_Role").addEventListener("click", function() {
+
+  if (document.getElementById("User_Role").value != "S") {
+
+    UserRole_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
+  return true;
+}
+});
+
+  function validate_gender() 
+  {
+    var Gender_Male = document.getElementById('Gender_Male');
+    var Gender_Female = document.getElementById('Gender_Female');
+    var Gender_Other = document.getElementById('Gender_Other');
+
+    if (!Gender_Male.checked && !Gender_Female.checked && !Gender_Other.checked) {
+      Gender_Error.innerHTML = 'Please select a Gender.';
+      return false;
+    }
+    Gender_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
+    return true;
+  }
+
+  document.getElementById("Gender_Male").addEventListener("click", function() {
+
+if (document.getElementById("Gender_Male").checked == true || document.getElementById("Gender_Female").checked == true || document.getElementById("Gender_Other").checked == true ) {
+
+    Gender_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
+   return true;
+}
+});
+/*
+
+document.getElementById("Gender_Female").addEventListener("click", function() {
+
+if (document.getElementById("Gender_Female").checked == true ) {
+
+    Gender_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
+   return true;
+}
+});
+
+document.getElementById("Gender_Other").addEventListener("click", function() {
+
+if (document.getElementById("Gender_Other").checked == true ) {
+
+    Gender_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
+   return true;
+}
+});*/
+
+function validatePassword()
+{
   var Password=document.getElementById('txtPassword').value.replace(/^\s+|\s+$/g, "");
   if(Password.length == 0)
   {
@@ -202,17 +294,35 @@ function validatePassword()
   return true;
 }
 
+function validateConfirm_Password()
+{
+  
+  var Confirm_Password=document.getElementById('txtConfirm_Password').value.replace(/^\s+|\s+$/g, "");
+  if(Confirm_Password.length == 0)
+  {
+    Confirm_Password_Error.innerHTML=' Confirm Password is required.';
+    return false;
+  }
+  Confirm_Password_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
+  return true;
+}
+
 
 function result()
 {
-  validatePassword();
+  validateName();
   validateUserEmail();
-  validateTerms();
+  validateNIC();
+  validateTelephoneNo();
+  validate_User_Role();
+  validate_gender();
+  validatePassword();
+  validateConfirm_Password();
 
-if((!validateUserEmail()) || (!validatePassword()) || (!validateTerms()) )
-  {
-    return false;
-  }
+if((!validateName()) || (!validateUserEmail()) || (!validateNIC()) || (!validateTelephoneNo()) || (!validate_User_Role()) || (!validate_gender()) ||  (!validatePassword()) || (!validateConfirm_Password()))
+{
+   return false;
+}
 }
 </script>
 </body>
