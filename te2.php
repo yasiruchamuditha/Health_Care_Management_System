@@ -1,53 +1,48 @@
 <?php require('M_Connection.php');
-if(isset($_POST["btnSubmit"]))
-{
-    session_start();
-    $Email=$_POST["txtUserEmail"];
-    $Password=$_POST["txtPassword"]; 
-	if(empty($Email) || empty($Password))
-    {
-      echo '<script>alert("Filed cannot be blank")</script>';
-    }
-	else
-	{
-		if (!filter_var($Email, FILTER_VALIDATE_EMAIL)) 
-		{
-			echo '<script>alert("Please Enter Valid UserEmail")</script>';       
-		}
-		else
-		{	
-       //perform sql
-        $sql = "SELECT * FROM user_registration WHERE  Password='$Password' and Email='$Email' ";
-        $result= mysqli_query($con, $sql);
-        $num_row = mysqli_num_rows($result);
-          if ($num_row >0) 
-            { 
-               $row = mysqli_fetch_array($result);
-                if($row['User_Role'] == 'Admin')
-                {
-                     $_SESSION['Email'] =  $Email;
-                     header('location:A_Admin_Panel.php'); 
+session_start();
+
+if (isset($_POST["btnSubmit"])) {
+    $Email = $_POST["txtUserEmail"];
+    $Password = $_POST["txtPassword"];
+
+    if (empty($Email) || empty($Password)) {
+        echo '<script>alert("Fields cannot be blank")</script>';
+    } else {
+        if (!filter_var($Email, FILTER_VALIDATE_EMAIL)) {
+            echo '<script>alert("Please Enter Valid UserEmail")</script>';
+        } else {
+            $sql = "SELECT * FROM user_registration WHERE Email=?";
+            $stmt = mysqli_prepare($con, $sql);
+            mysqli_stmt_bind_param($stmt, "s", $Email);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            $num_row = mysqli_num_rows($result);
+
+            if ($num_row > 0) {
+                $row = mysqli_fetch_array($result);
+                if (password_verify($Password, $row['Password'])) {
+                    $_SESSION['Email'] = $Email;
+
+                    if ($row['User_Role'] == 'Admin') {
+                        header('location:A_Admin_Panel.php');
+                        exit;
+                    } elseif ($row['User_Role'] == 'Doctor') {
+                        header('location:D_Doctor_Panel.php');
+                        exit;
+                    } elseif ($row['User_Role'] == 'Patient') {
+                        header('location:index.php');
+                        exit;
+                    }
+                } else {
+                    echo '<script>alert("Invalid Username and Password Combination")</script>';
                 }
-                elseif($row['User_Role'] == 'Doctor')
-                {
-                     $_SESSION['Email'] =  $Email;
-                     header('location:D_Doctor_Panel.php'); 
-                }
-                elseif($row['User_Role'] == 'Patient') 
-                {
-                    $_SESSION['Email'] =  $Email;
-                    header('location:index.php'); 
-                }                             
+            } else {
+                echo '<script>alert("Invalid Username and Password Combination")</script>';
             }
-            else
-            {
-                 echo '<script>alert("Invalid Username and Password Combination")</script>';
-            }
-        //disconnect 
-         mysqli_close($con);
+            mysqli_stmt_close($stmt);
         }
-       
     }
+    mysqli_close($con);
 }
 ?>
 
@@ -78,7 +73,7 @@ if(isset($_POST["btnSubmit"]))
 <!--Password-->
 <div class="inputfeild mt-4">
   	<label for="Password" class="form-label">Password :</label>
-  	<input type="text" class="form-control" name="txtPassword" id="txtPassword" placeholder="Enter Your Password"  onkeyup="validatePassword()">
+  	<input type="password" class="form-control" name="txtPassword" id="txtPassword" placeholder="Enter Your Password"  onkeyup="validatePassword()">
     <span id="Password_Error"></span>
   </div>
 <!--Check Terms -->
@@ -89,7 +84,7 @@ if(isset($_POST["btnSubmit"]))
   </div>
   <div class="inputfeild mt-4">
     <label for="ForgottenPassword" class="form-label" ><a href="M_Forgotten_Password.php" target="_blank" id="forgotten"  >Forgotten Password ? Click Here. </a></label><br>
-    <label for="Signup" class="form-label" ><a href="M_User_Registration.php.php" target="_blank"  id="signup" >Don't Have Account ? Click Here. </a></label><br>
+    <label for="Signup" class="form-label" ><a href="te.php" target="_blank"  id="signup" >Don't Have Account ? Click Here. </a></label><br>
   </div>  
  <!--Button-->
   <button type="submit" class="btn btn-outline-primary btn-lg" id="btnSubmit" name="btnSubmit" >Submit</button>
@@ -126,7 +121,6 @@ function validateUserEmail()
 
 function validatePassword()
 {
-  
   var Password=document.getElementById('txtPassword').value.replace(/^\s+|\s+$/g, "");
   if(Password.length == 0)
   {
@@ -146,25 +140,22 @@ function validateTerms()
   }
    Check_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
    return true;
-
 }
 
 document.getElementById("chStatus").addEventListener("click", function() {
-
   if(document.getElementById('chStatus').checked == true){ 
-
-  Check_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
-  return true;
-}
+    Check_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
+    return true;
+  }
 });
-//@author: SS Labs
+
 function result()
 {
   validatePassword();
   validateUserEmail();
   validateTerms();
 
-if((!validateUserEmail()) || (!validatePassword()) || (!validateTerms()) )
+  if((!validateUserEmail()) || (!validatePassword()) || (!validateTerms()) )
   {
     return false;
   }

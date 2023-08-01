@@ -100,7 +100,7 @@ if (isset($_SESSION["Email"])) {
             <?php endif; ?>
             <form class="row g-3 needs-validation" name="frmBloodTest" method="post" autocomplete="off"
                 action="#">
-                <div class="inputfeild mb-3">
+            <div class="inputfeild mb-3">
                 <label for="patient_id" class="form-label">Patient NIC:</label>
                 <input type="text" id="patient_id" name="txtPatient_NIC" class="form-control" placeholder="Please Enter Your NIC:" required>
             </div>

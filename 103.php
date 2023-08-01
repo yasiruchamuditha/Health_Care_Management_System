@@ -14,50 +14,69 @@ if (isset($_POST['specialization'])) {
 
 }
 
-/*
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['option_select'])) {
-        $selected_option = $_POST['option_select'];
-        // Do something with the selected value 
-        $sql = "INSERT INTO selected_options (selected_option) VALUES ('$selected_option')";
-    
-        } 
-    }
-*/
-if (isset($_SESSION["Email"])) {
-    if (isset($_POST["btnSubmit"])) {
+if (isset($_SESSION["Email"]))
+ {
+    if (isset($_POST["btnSubmit"])) 
+    {
         $Patient_NIC = $_POST["txtPatient_NIC"];
         $Email = $_POST["txtEmail"];
         $Appointment_Date = $_POST["txtAppointment_Date"];
         $selected_option = $_POST['option_select'];
 
-        // Perform SQL to find if this NIC already has an appointment for the same blood type
-        $sql1 = "SELECT * FROM Doctor_Appoinments WHERE Patient_NIC='$Patient_NIC' AND 	selected_option='$selected_option'";
-        $result = mysqli_query($con, $sql1);
-        $num_row = mysqli_num_rows($result);
-        if ($num_row > 0) {
-            $row = mysqli_fetch_array($result);
-            if ($row['Email'] == $Email) {
-                $alertMessage = "Already Registered for the Appointment!";
-                $redirectLocation = "index.php";
-            }
-        } else {
-            $sql2 = "INSERT INTO Doctor_Appoinments (Patient_NIC, Email, Appointment_Date, selectedSpecialization, selected_option)
+        $sql1 = "SELECT * FROM user_Registration WHERE Email='$Email' ";
+        $ret1 = mysqli_query($con, $sql1);
+        $num_row1 = mysqli_num_rows($ret1);
+        if ($num_row1 > 0)
+        {  
+          $row1 = mysqli_fetch_array($ret1);
+            if ($row1['Email'] == $Email && $row1['NIC'] == $Patient_NIC)
+            {
+            // Perform SQL to find if this NIC already has an appointment for the same blood type
+            $sql2 = "SELECT * FROM Doctor_Appoinments WHERE Patient_NIC='$Patient_NIC' AND 	selected_option='$selected_option'";
+            $ret2 = mysqli_query($con, $sql2);
+            $num_row2 = mysqli_num_rows($ret2);
+             if ($num_row2 > 0)
+             {
+               $row2 = mysqli_fetch_array($ret2);
+               if ($row2['Email'] == $Email) 
+               {
+                 $alertMessage = "Already Registered for the Appointment!";
+                 $redirectLocation = "index.php";
+               }
+             } 
+             else
+             {
+              $sql3 = "INSERT INTO Doctor_Appoinments (Patient_NIC, Email, Appointment_Date, selectedSpecialization, selected_option)
                      VALUES('$Patient_NIC', '$Email', '$Appointment_Date', '$selectedSpecialization', '$selected_option')";
 
-            $ret2 = mysqli_query($con, $sql2);
-            if ($ret2 > 0) {
+              $ret3 = mysqli_query($con, $sql3);
+              if ($ret3 > 0) 
+              {
                 $alertMessage = "Registration successful!";
                 $redirectLocation = "index.php";
-            } else {
+              }
+              else 
+              {
                 $alertMessage = "Please Try Again Shortly....";
                 $redirectLocation = "index.php";
-            }
-            // Disconnect 
-            mysqli_close($con);
+              }
+               // Disconnect 
+              mysqli_close($con);
+             }
+          }else{
+            $alertMessage = "Please Provide Correct Email and NIC that provided in User Registration Process.";
+            $redirectLocation = "index.php";
         }
-    }
-} else {
+       
+        }
+        else{
+            $alertMessage = "Please Try Again Later.g";
+            $redirectLocation = "index.php";
+        }
+    } 
+} 
+else
+{
     $alertMessage = "Please LogIn First Before Making an Appointment";
     $redirectLocation = "M_User_Login.php";
 }
@@ -141,7 +160,7 @@ if (isset($_SESSION["Email"])) {
             <div class="inputfeild mb-3">
                 <label for="option_select" class="form-label">Select a doctor:</label>
                 <select name="option_select" id="option_select" class="form-select" required>
-                <?php
+                <?php require_once('M_Connection.php');
                 // Retrieve options from the database and populate the select box
                 $sql = "SELECT Name, Medical_No FROM doctor_registration WHERE Specialization='$selectedSpecialization' ";
                 $result = $con->query($sql);
@@ -159,8 +178,9 @@ if (isset($_SESSION["Email"])) {
                 // If no rows fetched, display a single option with below message
                   echo "<option value=''>No Doctors For this moment, Please try again later.</option>";
                   $_SESSION['Medical_No'] =  'null';
+                  header("Location: index.php?message=" . urlencode($message));
+                  exit(); // Make sure to exit after redirection to prevent further execution of the script
                 }
-
                    $con->close();
                  ?>
                 </select>

@@ -149,7 +149,7 @@
 
     </div>
 
-    <form action="PD_Selection_Details.php" method="post" id="specializationForm">
+    <form action="103.php" method="post" id="specializationForm">
         <input type="hidden" name="specialization" id="specializationInput">
     </form>
 

@@ -9,34 +9,45 @@ $Names = '';
 if (isset($_POST["btnSubmit"])) {
     $Email = $_POST["txtUserEmail"];
     $Medical_No = $_POST["txtMedicalNo"];
-    $Specialization = $_POST["txtSpecialization"];
+    $Specialization = $_POST["Specialization"];
     $GraduateYears = $_POST["txtGYears"];
     $ExprienceYears = $_POST["txtEYears"];
     $Workplace = $_POST["txtWorkplace"];
     $WorkAddress = $_POST["txtWorkAddress"];
     
-
-    // Perform SQL to find if this email is registered in the website
-    $sql1 = "SELECT * FROM Doctor_Registration WHERE Email='$Email' ";
-    $result = mysqli_query($con, $sql1);
-    $num_row = mysqli_num_rows($result);
-    if ($num_row > 0) {
-        $row = mysqli_fetch_array($result);
-        if ($row['Email'] == $Email) {
-            $alertMessage = "Already Registred in the System !";
-            $redirectLocation = "D_Doctor_Panel.php";
-        }
-    } else {
-             $sql2 = "SELECT * FROM user_Registration WHERE Email='$Email' ";
-             $ret1 = mysqli_query($con, $sql2);
-             $row1=mysqli_fetch_assoc($ret1);
-             $Names = $row1['Name'];
+    $sql1 = "SELECT * FROM user_Registration WHERE Email='$Email' ";
+    $ret1 = mysqli_query($con, $sql1);
+    $num_row1 = mysqli_num_rows($ret1);
+    if ($num_row1 > 0)
+    {
+        $row1 = mysqli_fetch_array($ret1);
+        if ($row1['Email'] == $Email) 
+        {
+            // Perform SQL to find if this email is registered in the website
+            $sql2 = "SELECT * FROM Doctor_Registration WHERE Email='$Email' ";
+            $ret2 = mysqli_query($con, $sql2);
+            $num_row2 = mysqli_num_rows($ret2);
+            if ($num_row2 > 0) 
+             {
+               $row2 = mysqli_fetch_array($ret2);
+                  if ($row2['Email'] == $Email) 
+                  {
+                   $alertMessage = "Already Registred in the System !";
+                   $redirectLocation = "D_Doctor_Panel.php";
+                  }
+             } 
+             else 
+             {
+             $sql3 = "SELECT * FROM user_Registration WHERE Email='$Email' ";
+             $ret3 = mysqli_query($con, $sql3);
+             $row3=mysqli_fetch_assoc($ret3);
+             $Names = $row3['Name'];
             // Perform SQL
-            $sql3 = "INSERT INTO Doctor_Registration (Name,Email, Medical_No, Specialization, GraduateYears, ExprienceYears, Workplace,WorkAddress)
-                 VALUES('$Names','$Email', '$Medical_No', $Specialization, '$GraduateYears', '$ExprienceYears', '$Workplace', '$WorkAddress')";
+            $sql4 = "INSERT INTO Doctor_Registration (Name,Email, Medical_No, Specialization, GraduateYears, ExprienceYears, Workplace,WorkAddress)
+                 VALUES('$Names','$Email', '$Medical_No', '$Specialization', '$GraduateYears', '$ExprienceYears', '$Workplace', '$WorkAddress')";
 
-            $ret2 = mysqli_query($con, $sql3);
-            if ($ret2 > 0) {
+            $ret4 = mysqli_query($con, $sql4);
+            if ($ret4 > 0) {
                 $alertMessage = "Registration successful!";
                 $redirectLocation = "D_Doctor_Panel.php";
             } else {
@@ -45,7 +56,16 @@ if (isset($_POST["btnSubmit"])) {
             }
             // Disconnect 
             mysqli_close($con);
+           }
+
+        }
+       
     }
+    else
+    {
+        $alertMessage = "Your are Not Registred in the System !";
+        $redirectLocation = "D_Doctor_Panel.php";
+    }   
 }
 ?>
 
@@ -112,9 +132,27 @@ if (isset($_POST["btnSubmit"])) {
                 <label  class="form-label mb-2">Medical License Number:</label>
                 <input type="text" class="form-control" name="txtMedicalNo" placeholder="Enter Your Medical License Number" required>
             </div>
-            <div class="inputfeild mt-3 ">
-                <label class="form-label mb-2">Specialization:</label>
-                <input type="text" class="form-control" name="txtSpecialization" placeholder="Enter Your Specialization" required >
+          
+            <div class="inputfeild mb-3">
+                <label for="doctor" class="form-label">Specialization:</label>
+                <select id="doctor" name="Specialization" class="form-select" required>
+                    <option value="" disabled selected>Select Your Specialization</option>
+                    <option value="Cardiology">Cardiology</option>
+                    <option value="Neurology">Neurology</option>
+                    <option value="Oncology">Oncology</option>
+                    <option value="Orthopedics">Orthopedics</option>
+                    <option value="Gastroenterology">Gastroenterology</option>
+                    <option value="Pulmonology">Pulmonology</option>
+                    <option value="Endocrinology">Endocrinology</option>
+                    <option value="Nephrology">Nephrology</option>
+                    <option value="Infectious_Disease">Infectious Disease</option>
+                    <option value="Obstetrics">Obstetrics</option>
+                    <option value="Pediatrics">Pediatrics</option>
+                    <option value="Psychiatry">Psychiatry</option>
+                    <option value="Gynecology">Gynecology</option>
+                    <option value="Emergency_Care">Emergency Care</option>
+                    <option value="Dentists">Dentists</option>
+                </select>
             </div>
             <div class="inputfeild mt-3 ">
                 <label  class="form-label mb-2">Year of Graduation:</label>
@@ -128,7 +166,6 @@ if (isset($_POST["btnSubmit"])) {
                 <label  class="form-label mb-2">Current Workplace/Hospital:</label>
                 <input type="text" class="form-control" name="txtWorkplace" placeholder="Enter Your Current Workplace/Hospital" required>
             </div>
-          
             <div class="inputfeild mt-3 ">
                 <label  class="form-label mb-2">Work Address:</label>
                 <input type="text" class="form-control" name="txtWorkAddress" placeholder="Enter Your Work Address" required>
