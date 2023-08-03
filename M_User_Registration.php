@@ -18,15 +18,15 @@ if (isset($_POST["btnSubmit"]))
     $Verification = "NotVerified";
 
     //perform sql to find this email is registered in the website
-    $sql1 = "SELECT * FROM user_registration WHERE NIC='$NIC' ";
+    $sql1 = "SELECT * FROM user_registration WHERE Email='$Email' ";
     $ret1 = mysqli_query($con, $sql1);
     $num_row = mysqli_num_rows($ret1);
     if ($num_row > 0)
     {
        $row = mysqli_fetch_array($ret1);
-       if($row['NIC'] == $NIC)
+       if($row['Email'] == $Email)
        {
-           $alertMessage = "There are already accounts registered under this NIC.";
+           $alertMessage = "There are already accounts registered under this Email.";
            $redirectLocation = "M_User_Login.php";
        } 
     }   
@@ -41,8 +41,24 @@ if (isset($_POST["btnSubmit"]))
             $result2 = mysqli_query($con, $sql2);
             if ($result2 > 0)
             {
-                $alertMessage = "Registration successful!";
-                $redirectLocation = "M_User_Login.php";
+                if($User_Role == 'Admin')
+                {
+                     $_SESSION['NIC'] =  $NIC;
+                     $alertMessage = "Registration successful!";
+                     $redirectLocation = "M_User_Login.php";
+                }
+                elseif($User_Role == 'Doctor')
+                {
+                     $_SESSION['NIC'] =  $NIC;
+                     $alertMessage = "Registration successful. Please Login";
+                     $redirectLocation = "M_User_Login.php";
+                }
+                elseif($User_Role == 'Patient') 
+                {
+                    $_SESSION['NIC'] =  $NIC;
+                    $alertMessage = "Personal Information Registration successful!";
+                    $redirectLocation = "P_Patient_Registration.php";
+                }                             
             } 
             else 
             {
@@ -80,18 +96,39 @@ if (isset($_POST["btnSubmit"]))
     <div class="container-fluid" id="containerm">
         <div class="container mt-3">
         <h1>User Registration</h1>
-            <?php if (!empty($alertMessage)) : ?>
-                <div class="alert alert-<?php echo ($redirectLocation === 'M_User_Login.php' ? 'success' : 'danger'); ?>">
-                    <?php echo $alertMessage; ?>
+        <?php if (!empty($alertMessage)) : ?>
+                <div class="modal fade" id="outputModal" tabindex="-1" aria-labelledby="outputModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="outputModalLabel">Output Message</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <?php echo $alertMessage; ?>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <?php if ($redirectLocation === 'M_User_Login.php'): ?>
-                    <script>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        var modal = new bootstrap.Modal(document.getElementById('outputModal'));
+                        modal.show();
                         // Redirect after displaying the message
-                        setTimeout(function () {
-                            window.location.href = '<?php echo $redirectLocation; ?>';
-                        }, 2000); // Redirect after 3 seconds (adjust as needed)
-                    </script>
-                <?php endif; ?>
+                        var redirectLocation = '<?php echo $redirectLocation; ?>';
+                        if (redirectLocation) {
+                            setTimeout(function () {
+                                window.location.href = redirectLocation;
+                            }, 3000); // Redirect after 3 seconds (adjust as needed)
+                        }
+                    });
+                </script>
             <?php endif; ?>
         <form class="row g-3 needs-validation" name="frmUserRegistration" method="post" autocomplete="off" action="#"  onsubmit="return result()" >
             <div class="inputfeild mt-3 ">
@@ -261,49 +298,67 @@ if (document.getElementById("Gender_Male").checked == true || document.getElemen
    return true;
 }
 });
-/*
 
-document.getElementById("Gender_Female").addEventListener("click", function() {
-
-if (document.getElementById("Gender_Female").checked == true ) {
-
-    Gender_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
-   return true;
-}
-});
-
-document.getElementById("Gender_Other").addEventListener("click", function() {
-
-if (document.getElementById("Gender_Other").checked == true ) {
-
-    Gender_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
-   return true;
-}
-});*/
 
 function validatePassword()
 {
   var Password=document.getElementById('txtPassword').value.replace(/^\s+|\s+$/g, "");
-  if(Password.length == 0)
+
+  if (Password.length == 0) 
   {
     Password_Error.innerHTML='Password is required.';
     return false;
   }
-  Password_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
+  else
+  {
+    const PasswordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+   if (!Password.match(PasswordPattern))
+   {
+    Password_Error.innerHTML='Please Enter Password with Numbers,symbols,upper and lower case (minimum 8 characters)';
+    return false;
+   }
+   Password_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
   return true;
+  }  
 }
 
+/*
 function validateConfirm_Password()
 {
-  
   var Confirm_Password=document.getElementById('txtConfirm_Password').value.replace(/^\s+|\s+$/g, "");
   if(Confirm_Password.length == 0)
   {
     Confirm_Password_Error.innerHTML=' Confirm Password is required.';
     return false;
   }
+  else{
+    var Passwordx=document.getElementById('txtPassword');
+    if (!Confirm_Password.match(Passwordx))
+   {
+    Confirm_Password_Error.innerHTML='Please Enter correct password Again.';
+    return false;
+   }
+  }
   Confirm_Password_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
   return true;
+}
+*/
+function validateConfirm_Password() {
+  var Confirm_Password = document.getElementById('txtConfirm_Password').value.trim();
+  var Passwordx = document.getElementById('txtPassword').value.trim();
+
+  var Confirm_Password_Error = document.getElementById('Confirm_Password_Error');
+
+  if (Confirm_Password.length === 0) {
+    Confirm_Password_Error.innerHTML = 'Confirm Password is required.';
+    return false;
+  } else if (Confirm_Password !== Passwordx) {
+    Confirm_Password_Error.innerHTML = 'Please Enter the correct password Again.';
+    return false;
+  } else {
+    Confirm_Password_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
+    return true;
+  }
 }
 
 

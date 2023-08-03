@@ -21,7 +21,7 @@
   <!-- Template Main CSS File -->
   <link href="css/style.css" rel="stylesheet">
 </head>
-<body>
+<body style="background-image: url(img/home.jpg);">
 <?php require('D_Navigation_Bar.php');?>
 <div  style="margin:150px;50px;100px;50px;">
 <div  style="margin:50px;0px;100px;0px;">

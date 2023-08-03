@@ -37,13 +37,13 @@ $ret= mysqli_query($con, $sql);
         $mail->isSMTP();                                            //Send using SMTP
         $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-        $mail->Username   = 'fuelupgroup@gmail.com';                     //SMTP username
-        $mail->Password   = 'yxejuwcqpkztsmln';                               //SMTP password
+        $mail->Username   = 'prcaretest@gmail.com';                     //SMTP username
+        $mail->Password   = 'nxszjtvwqummfwby';                               //SMTP password
         $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
         $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
     
         //Recipients
-        $mail->setFrom('fuelupgroup@gmail.com', 'Fuel Up');
+        $mail->setFrom('prcaretest@gmail.com', 'PR CARE');
         //Add a recipient
         $mail->addAddress($Email);   
         //$mail->addAddress('ellen@example.com');      //Name is optional
@@ -63,7 +63,7 @@ $ret= mysqli_query($con, $sql);
         <p>Hi,<br>
         Dear User,<br>
         <b>Welcome back to your account.</b></p>
-        <p>If you suspect you were locked out of your account because of changes made by someone else, please <a href="fuelupgroup@gmail.com"><b><u>contact</u></b></a> us immediately to protect your account.</p>
+        <p>If you suspect you were locked out of your account because of changes made by someone else, please <a href="prcaretest@gmail.com"><b><u>contact</u></b></a> us immediately to protect your account.</p>
         <p>Thanks for helping us keep your account secure<br>Sincerely yours,<br>
         The PRCARE Team</p>';
         //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
@@ -123,7 +123,7 @@ else
 <div class="inputfeild mt-3">
     <label for="confirmpassword" class="form-label">Confirm New Password</label>
     <input type="text" class="form-control" id="txtConfirmPassword" name="txtConfirmPassword" placeholder="Confirm New Password" onkeyup="confirmPass()" >
-    <span id="ConfirmPassword_Error"></span>
+    <span id="Confirm_Password_Error"></span>
   </div>
 
  <!--Button-->
@@ -135,9 +135,9 @@ else
 <!-- Template Main JS File -->
 <script src="js/main.js"></script>
 <script type="text/javascript">
-	var Email_Error=document.getElementById('Email_Error');
+	 var Email_Error=document.getElementById('Email_Error');
     var Password_Error=document.getElementById('Password_Error');
-    var ConfirmPassword_Error=document.getElementById('ConfirmPassword_Error');
+    var Confirm_Password_Error=document.getElementById('Confirm_Password_Error');
 function validateEmail()
 {
   var Email = document.getElementById('txtEmail').value.replace(/^\s+|\s+$/g, "");
@@ -159,29 +159,44 @@ function validateEmail()
   }  
 }
 
-function validatePassword() 
+function validatePassword()
 {
-passInput=document.getElementById('txtpassword').value.replace(/^\s+|\s+$/g, "");
-    if (passInput.length == 0)
-     {
-      Password_Error.innerHTML='Password is required.';
-     return false;
+  var Password=document.getElementById('txtpassword').value.replace(/^\s+|\s+$/g, "");
 
-    }
-  Password_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
+  if (Password.length == 0) 
+  {
+    Password_Error.innerHTML='Password is required.';
+    return false;
+  }
+  else
+  {
+    const PasswordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+   if (!Password.match(PasswordPattern))
+   {
+    Password_Error.innerHTML='Please Enter Password with Numbers,symbols,upper and lower case (minimum 8 characters)';
+    return false;
+   }
+   Password_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
   return true;
+  }  
 }
 
 function confirmPass() {
-passInput=document.getElementById('txtpassword').value.replace(/^\s+|\s+$/g, "");
-cPassInput=document.getElementById('txtConfirmPassword').value.replace(/^\s+|\s+$/g, "");
-if (cPassInput.length == 0) 
-  {
-      ConfirmPassword_Error.innerHTML='Password is required';
-     return false;
+  var Confirm_Password = document.getElementById('txtConfirmPassword').value.trim();
+  var Passwordx = document.getElementById('txtpassword').value.trim();
+
+  var Confirm_Password_Error = document.getElementById('Confirm_Password_Error');
+
+  if (Confirm_Password.length === 0) {
+    Confirm_Password_Error.innerHTML = 'Confirm Password is required.';
+    return false;
+  } else if (Confirm_Password !== Passwordx) {
+    Confirm_Password_Error.innerHTML = 'Please Enter the correct password Again.';
+    return false;
+  } else {
+    Confirm_Password_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
+    return true;
   }
-  ConfirmPassword_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
-  return true;
 }
 
 function result()

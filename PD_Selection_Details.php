@@ -24,32 +24,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } 
     }
 */
-if (isset($_SESSION["Email"])) {
-    if (isset($_POST["btnSubmit"])) {
+if (isset($_SESSION["Email"])) 
+{
+    if (isset($_POST["btnSubmit"])) 
+    {
         $Patient_NIC = $_POST["txtPatient_NIC"];
         $Email = $_POST["txtEmail"];
         $Appointment_Date = $_POST["txtAppointment_Date"];
         $selected_option = $_POST['option_select'];
+        $Medical_No = $_SESSION['Medical_No'];
 
         // Perform SQL to find if this NIC already has an appointment for the same blood type
         $sql1 = "SELECT * FROM Doctor_Appoinments WHERE Patient_NIC='$Patient_NIC' AND 	selected_option='$selected_option'";
         $result = mysqli_query($con, $sql1);
         $num_row = mysqli_num_rows($result);
-        if ($num_row > 0) {
+        if ($num_row > 0) 
+        {
             $row = mysqli_fetch_array($result);
-            if ($row['Email'] == $Email) {
+            if ($row['Email'] == $Email) 
+            {
                 $alertMessage = "Already Registered for the Appointment!";
                 $redirectLocation = "index.php";
             }
-        } else {
-            $sql2 = "INSERT INTO Doctor_Appoinments (Patient_NIC, Email, Appointment_Date, selectedSpecialization, selected_option)
-                     VALUES('$Patient_NIC', '$Email', '$Appointment_Date', '$selectedSpecialization', '$selected_option')";
+        } 
+        else 
+        {
+            $sql2 = "INSERT INTO Doctor_Appoinments (Patient_NIC, Email, Appointment_Date, selectedSpecialization, selected_option,Medical_No)
+                     VALUES('$Patient_NIC', '$Email', '$Appointment_Date', '$selectedSpecialization', '$selected_option','$Medical_No')";
 
             $ret2 = mysqli_query($con, $sql2);
-            if ($ret2 > 0) {
+            if ($ret2 > 0) 
+            {
                 $alertMessage = "Registration successful!";
                 $redirectLocation = "index.php";
-            } else {
+            } 
+            else 
+            {
                 $alertMessage = "Please Try Again Shortly....";
                 $redirectLocation = "index.php";
             }
@@ -57,7 +67,9 @@ if (isset($_SESSION["Email"])) {
             mysqli_close($con);
         }
     }
-} else {
+}
+else
+{
     $alertMessage = "Please LogIn First Before Making an Appointment";
     $redirectLocation = "M_User_Login.php";
 }
@@ -149,9 +161,10 @@ if (isset($_SESSION["Email"])) {
                 if ($result->num_rows > 0) {
                    while ($row = $result->fetch_assoc()) {
                         $_SESSION['Medical_No'] =  $row["Medical_No"];
-                        $option_label = $row["Name"] . " - " . $row["Medical_No"]; // Combine Name and Medical_No
-                        $option_label_with_dr = "Dr. " . $option_label;
-                        echo "<option value='" . htmlspecialchars($option_label_with_dr) . "'>" . htmlspecialchars($option_label_with_dr) . "</option>";
+                        $option_label_Name = $row["Name"];
+                        $option_label_with_dr = "Dr. " . $option_label_Name;
+                        $option_label_With_dr_M = $option_label_with_dr . " - " . $row["Medical_No"]; // Combine Name and Medical_No
+                        echo "<option value='" . htmlspecialchars($option_label_with_dr) . "'>" . htmlspecialchars($option_label_With_dr_M) . "</option>";
                    }
                 }
                 else 

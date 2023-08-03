@@ -15,11 +15,12 @@ if (isset($_POST["btnSubmit"])) {
     $Workplace = $_POST["txtWorkplace"];
     $WorkAddress = $_POST["txtWorkAddress"];
     
+    // Perform SQL to find if this email is registered in the user
     $sql1 = "SELECT * FROM user_Registration WHERE Email='$Email' ";
     $ret1 = mysqli_query($con, $sql1);
     $num_row1 = mysqli_num_rows($ret1);
     if ($num_row1 > 0)
-    {
+    {   
         $row1 = mysqli_fetch_array($ret1);
         if ($row1['Email'] == $Email) 
         {

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PR CARE - Blood Test</title>
+    <title>PR CARE - Our Medicle Specialists </title>
     <!-- Template Main CSS File -->
     <link href="css/PD_Service.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -149,7 +149,7 @@
 
     </div>
 
-    <form action="103.php" method="post" id="specializationForm">
+    <form action="PD_Selection_Details.php" method="post" id="specializationForm">
         <input type="hidden" name="specialization" id="specializationInput">
     </form>
 
