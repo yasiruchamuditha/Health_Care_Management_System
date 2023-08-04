@@ -1,12 +1,27 @@
 <?php require_once('M_Connection.php');
 session_start();
 
+//Import PHPMailer classes into the global namespace
+//These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+//Load Composer's autoloader
+//require 'vendor/autoload.php';
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+
 // Define variables to store messages
 $alertMessage = '';
 $redirectLocation = '';
 
 if (isset($_POST["btnSubmit"])) 
 {
+    //create a new PHPMailer object:
+    $mail = new PHPMailer(true); 
+
     $Name = $_POST["txtName"];
     $Email = $_POST["txtUSerEmail"];
     $NIC = $_POST["txtNIC"];
@@ -43,14 +58,137 @@ if (isset($_POST["btnSubmit"]))
             {
                 if($User_Role == 'Admin')
                 {
-                     $_SESSION['NIC'] =  $NIC;
-                     $alertMessage = "Registration successful!";
-                     $redirectLocation = "M_User_Login.php";
+                  $_SESSION['NIC'] =  $NIC;
+                  $alertMessage = "Registration successful!";
+                //email admin
+                  try 
+                  {
+                   //Server settings
+                   //$mail->SMTPDebug = 1;                //Enable verbose debug output
+                  $mail->isSMTP();                       //Send using SMTP
+                  $mail->Host       = 'smtp.gmail.com';  //Set the SMTP server to send through
+                  $mail->SMTPAuth   = true;              //Enable SMTP authentication
+                  $mail->Username   = 'prcaretest@gmail.com';  //SMTP username
+                  $mail->Password   = 'rmtoagnrrqvjnzne';       //SMTP password
+                  $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
+                  $mail->Port       = 587;              //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+                  //Recipients
+                  $mail->setFrom('prcaretest@gmail.com', 'PR CARE');
+                  //Add a recipient
+                  $mail->addAddress($Email);   
+                  //$mail->addAddress('ellen@example.com');               //Name is optional
+                  //$mail->addReplyTo('info@example.com', 'Information');
+                  // $mail->addCC('cc@example.com');
+                  // $mail->addBCC('bcc@example.com');
+                  //Attachments
+                  //$mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+                  // $mail->addAttachment('/tmp/image.jpg', 'new.jpg'); 
+                  //Optional name
+                  //Content
+                  $mail->isHTML(true);       
+                  //$verification_code=substr(number_format(time()*rand(),0,'',''), 0,6);                          
+                  //Set email format to HTML
+                  $mail->Subject = 'Account Registration';
+                   $mail->Body    = '<div style="width: 700px ; background-color:lightskyblue; font-weight: bold;text-align: center;font-family: Arial;font-size: 30pt;">
+                                     Welcome '.$Name.' to FuelUp Family
+                                    </div>
+                                    <div style="width: 700px; height:1500px; background-color:white;font-family: Arial;">
+                                    <p>Hi,<br>Dear Admin,<br>Your FuelUp Admin Account is successfully Registered on '.$Email.'</p>
+                                    <p>You can Use this '.$Email.' to signup Fuelup Admin panel</p>
+                                    <p>we accept your full effort in the fuelup family </p>
+                                    <p>please <a href="mailto:fuelupgroup@gmail.com"><b><u>contact</u></b></a> us for more Details.</p>
+                                    <p>Thank You.<br>Sincerely yours,<br>
+                                    The FuelUp Team</p>
+                                    </div>';
+                   //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+                  $mail->send();
+                  //echo 'Message has been sent';
+                  }
+                  catch (Exception $e)
+                  {
+                    //echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                    echo '<script>alert("Email is not send...")</script>';
+                  }
+                  //end
+                  $redirectLocation = "M_User_Login.php"; 
                 }
                 elseif($User_Role == 'Doctor')
                 {
                      $_SESSION['NIC'] =  $NIC;
                      $alertMessage = "Registration successful. Please Login";
+
+                     try {
+                      // Initialize PHPMailer
+                      $mail = new PHPMailer(true);
+                  
+                      // Server settings
+                      $mail->isSMTP();                       // Send using SMTP
+                      $mail->Host       = 'smtp.gmail.com';  // Set the SMTP server to send through
+                      $mail->SMTPAuth   = true;              // Enable SMTP authentication
+                      $mail->Username   = 'prcaretest@gmail.com';  // SMTP username
+                      $mail->Password   = 'rmtoagnrrqvjnzne';       // SMTP password
+                      $mail->SMTPSecure = 'tls';            // Enable implicit TLS encryption
+                      $mail->Port       = 587;              // TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+                  
+                      // Recipients
+                      $mail->setFrom('prcaretest@gmail.com', 'PR CARE');
+                      $mail->addAddress($Email);
+                  
+                      // Email content
+                      $Name = htmlspecialchars($Name); // Sanitize Name to prevent XSS attacks
+                      $Email = htmlspecialchars($Email); // Sanitize Email to prevent XSS attacks
+                  
+                      // Inline styles for the email content
+                      $inlineStyles = "
+                          .container {
+                              width: 700px;
+                              background-color: lightskyblue;
+                              font-weight: bold;
+                              text-align: center;
+                              font-family: Arial;
+                              font-size: 30pt;
+                          }
+                          .content {
+                              width: 700px;
+                              height: 1500px;
+                              background-color: white;
+                              font-family: Arial;
+                          }
+                      ";
+                  
+                      // Email content
+                      $mailContent = "
+                          <div class='container'>
+                              Welcome $Name to FuelUp Family
+                          </div>
+                          <div class='content'>
+                              <p>Hi,<br>Dear Admin,<br>Your FuelUp Admin Account is successfully Registered on $Email</p>
+                              <p>You can use this $Email to sign up for the FuelUp Admin panel</p>
+                              <p>We appreciate your full effort in the FuelUp family</p>
+                              <p>Please <a href='mailto:fuelupgroup@gmail.com'><b><u>contact</u></b></a> us for more details.</p>
+                              <p>Thank You.<br>Sincerely yours,<br>The FuelUp Team</p>
+                          </div>
+                      ";
+                  
+                      // Final HTML for the email
+                      $mail->isHTML(true);
+                      $mail->Subject = 'Account Registration';
+                      $mail->Body = "<style>$inlineStyles</style>$mailContent";
+                  
+                      // Send the email
+                      $mail->send();
+                  
+                      // Success message
+                      //echo 'Message has been sent';
+                  } catch (Exception $e) {
+                      // Error handling
+                      //echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                      echo '<script>alert("Email is not sent...")</script>';
+                  }
+ 
+
+
+
                      $redirectLocation = "M_User_Login.php";
                 }
                 elseif($User_Role == 'Patient') 
