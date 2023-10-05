@@ -4,7 +4,8 @@ require_once('M_Connection.php');
 // Initialize the status message variable
 $statusMessage = '';
 
-if (isset($_POST['btnDelete'])) {
+if (isset($_POST['btnDelete']))
+{
     $deleteid = $_POST['deleteid'];
     $sql = "DELETE FROM Blood_Test WHERE ID=?";
     $stmt = mysqli_prepare($con, $sql);
