@@ -4,8 +4,23 @@ require_once('M_Connection.php');
 // Initialize the status message variable
 $statusMessage = '';
 
+if (isset($_POST['btnApprove'])) {
+    $Patient_NIC = $_POST['Approveid'];
+    $insertSql = "INSERT INTO approved_appoinment (Patient_NIC) VALUES (?)";
+    $insertStmt = mysqli_prepare($con, $insertSql);
+    mysqli_stmt_bind_param($insertStmt, "s", $Patient_NIC);
+    $insertRet = mysqli_stmt_execute($insertStmt);
+
+    if ($insertRet) {
+        $statusMessage = '<div class="alert alert-success" role="alert">Successfully Approved</div>';
+    } else {
+        $statusMessage = '<div class="alert alert-danger" role="alert">Please Try Again Shortly...</div>';
+    }
+    mysqli_stmt_close($insertStmt);
+}
+
 if (isset($_POST['btnDelete'])) {
-    $deleteid = $_POST['deleteid'];
+    $deleteid = $_POST['Deleteid'];
     $sql = "DELETE FROM doctor_appoinments WHERE Patient_NIC =?";
     $stmt = mysqli_prepare($con, $sql);
     mysqli_stmt_bind_param($stmt, "s", $deleteid);
@@ -56,8 +71,8 @@ if (isset($_POST['btnDelete'])) {
                     <th scope="col">Patient Name</th>
                     <th scope="col">Appointment_Date</th>
                     <th scope="col">Appointment_Time</th>
-                    <th scope="col">Futher Details</th>
-                    <th scope="col">Operation</th>
+                    <th scope="col">Approve</th>
+                    <th scope="col">Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -67,19 +82,19 @@ if (isset($_POST['btnDelete'])) {
                 $ret = mysqli_query($con, $sql);
                 if ($ret) {
                     while ($row = mysqli_fetch_assoc($ret)) {
+
                         $Patient_NIC  = htmlspecialchars($row['Patient_NIC']);
+                        $Appointment_Date = htmlspecialchars($row['Appointment_Date']);
 
                         $sql1 = "SELECT Name FROM Patient_Registration WHERE NIC  = '$Patient_NIC'";
                         $result = mysqli_query($con, $sql1);
-                        $num_row = mysqli_num_rows($result);
-                        if ($num_row > 0)
-                        {
-                            while ($innerRow = $result->fetch_assoc()) {
-                                $Patient_Name = $innerRow["Name"];  
+                        if ($result) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                $Patient_Name = htmlspecialchars($row['Name']);  
                             }
                             
                         }
-                        $Appointment_Date = htmlspecialchars($row['Appointment_Date']);
+                      
                         $Appointment_Time = ' ';
                         echo '<tr>
                             <th scope="row">' . $Patient_NIC . '</th> 
@@ -89,15 +104,15 @@ if (isset($_POST['btnDelete'])) {
                                 
                             <td>
                                 <form method="post">
-                                    <input type="hidden" name="Selectid" value="' . $Patient_NIC . '">
-                                    <button type="submit" class="btn btn-danger" name="btnSelect">Click Here</button>
+                                    <input type="hidden" name="Approveid" value="' . $Patient_NIC . '">
+                                    <button type="submit" class="btn btn-danger" name="btnApprove">Click Here</button>
                                 </form>
                             </td>
                             
                             <td>
                                 <form method="post">
-                                    <input type="hidden" name="Approveid" value="' . $Patient_NIC . '">
-                                    <button type="submit" class="btn btn-danger" name="btnApprove">Click Here</button>
+                                    <input type="hidden" name="Deleteid" value="' . $Patient_NIC . '">
+                                    <button type="submit" class="btn btn-danger" name="btnDelete">Click Here</button>
                                 </form>
                             </td>
                         </tr>';

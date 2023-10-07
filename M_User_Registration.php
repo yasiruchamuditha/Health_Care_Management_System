@@ -147,8 +147,8 @@ if (isset($_POST["btnSubmit"]))
                                         Welcome '.$Name.' to PR CARE Family
                                        </div>
                                        <div style="width: 700px; height:1500px; background-color:white;font-family: Arial;">
-                                       <p>Hi,<br>Dear Admin,<br>Your PR CARE Admin Account is successfully Registered on '.$Email.'</p>
-                                       <p>You can Use this '.$Email.' to signup PR CARE Admin panel.</p>
+                                       <p>Hi,<br>Dear Doctor,<br>Your PR CARE Doctor Account is successfully Registered on '.$Email.'</p>
+                                       <p>You can Use this '.$Email.' to signup PR CARE Doctor panel.</p>
                                        <p>we accept your full effort in the fuelup family. Please <a href="mailto:fuelupgroup@gmail.com"><b><u>contact</u></b></a> us for more Details.</p>
                                        <p>Thank You.<br>Sincerely yours,<br>
                                        The PR CARE Team</p>
@@ -165,7 +165,7 @@ if (isset($_POST["btnSubmit"]))
 
 
 
-                     $redirectLocation = "M_User_Login.php";
+                     $redirectLocation = "M_Doctor_Registration.php";
                 }
                 elseif($User_Role == 'Patient') 
                 {
@@ -204,8 +204,8 @@ if (isset($_POST["btnSubmit"]))
                                        Welcome '.$Name.' to PR CARE Family
                                       </div>
                                       <div style="width: 700px; height:1500px; background-color:white;font-family: Arial;">
-                                      <p>Hi,<br>Dear Admin,<br>Your PR CARE Admin Account is successfully Registered on '.$Email.'</p>
-                                      <p>You can Use this '.$Email.' to signup PR CARE Admin panel.</p>
+                                      <p>Hi,<br>Dear Patient,<br>Your PR CARE Patient Account is successfully Registered on '.$Email.'</p>
+                                      <p>You can Use this '.$Email.' to signup PR CARE Patient panel.</p>
                                       <p>we accept your full effort in the fuelup family. Please <a href="mailto:fuelupgroup@gmail.com"><b><u>contact</u></b></a> us for more Details.</p>
                                       <p>Thank You.<br>Sincerely yours,<br>
                                       The PR CARE Team</p>
