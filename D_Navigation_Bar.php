@@ -27,8 +27,8 @@
  <div id="topbar" class="d-flex align-items-center fixed-top">
     <div class="container d-flex justify-content-between">
       <div class="contact-info d-flex align-items-center">
-        <i class="bi bi-envelope"></i> <a href="mailto:contact@example.com">dinirathnayaka24@gmail.com</a>
-        <i class="bi bi-phone"></i> +941962409
+        <i class="bi bi-envelope"></i> <a href="mailto:contact@example.com">prcare@gmail.com</a>
+        <i class="bi bi-phone"></i> +94123456789
       </div>
       <div class="d-none d-lg-flex social-links align-items-center">
         <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
